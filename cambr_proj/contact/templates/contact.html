@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md-8">
+		<h1>Contact Us</h1>
+		<form action="." method="POSt" accept-charset="utf-8" enctype="multipart/form-data">{% csrf_token %}
+			{{ form|crispy}}
+			<input type="submit" class="btn btn-primary" value="Send" />
+		</form>
+	</div>
+	<div class="col-md-4">
+		
+	</div>
+</div>
+
+{% endblock %}

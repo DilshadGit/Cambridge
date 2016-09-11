@@ -1,0 +1,21 @@
+.navbar-inverse {
+	background: none;
+	background-color: #004080;
+}
+
+.navbar-inverse .navbar-brand {
+	color: #fff;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+	color: #fff;
+}
+
+.index {
+	min-height: 300px;
+}
+
+footer.footer {
+	height: 140px;
+	background-color: #004080;
+}
