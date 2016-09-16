@@ -1,0 +1,85 @@
+# ************************************************************************
+# ************** Setup all host and IP names for servers *****************
+# ************************************************************************
+
+[example]
+188.166.145.32
+
+[example2]
+127.0.0.1
+
+# Application servers
+[app]
+192.168.60.4
+192.168.60.5
+
+# Database server
+[db]
+192.168.60.6
+
+# Alfa Aesar ElasticSearch server with V1.7 ES Kiban 4.6 & Sense & Marvel
+[alfa-elasticV1-7]
+192.168.60.30
+
+# Alfa Aesar ElasticSearch server with V2.4 ES Kiban 4.6 & Sense & Marvel running as master.
+[alfa-elasticV2-4-master]
+192.168.60.31
+
+# Alfa Aesar ElasticSearch server with V2.4 ES running as a replication node.
+[alfa-elasticV2-4-rep-1]
+192.168.60.32
+
+# Alfa Aesar ElasticSearch server with V1.7 ES running as a replication node.
+[alfa-elasticV2-4-rep-2]
+192.168.60.33
+
+# Alfa Aesar ElasticSearch server with V1.7 ES running as a replication node.
+[alfa-elasticV2-4-rep-3]
+192.168.60.34
+
+
+# ************************************************************************
+# ****************** Setup all groups for each server ********************
+# ************************************************************************
+
+#Group 'multi' with all servers
+[multi:children]
+app
+db
+
+#Group 'alfa-ElasticV2-all' with master and replication nodes
+[alfa-ElasticV2-all:children]
+alfa-elasticV2-4-master
+alfa-elasticV2-4-rep-1
+alfa-elasticV2-4-rep-2
+alfa-elasticV2-4-rep-3
+
+#Group 'alfa-Elastic-all' with all ElasticSearch V2 and V1 servers
+[alfa-Elastic-all:children]
+alfa-ElasticV2-all
+alfa-elasticV1-7
+
+
+# ************************************************************************
+# **************** Setup all variables for each server *******************
+# ************************************************************************
+
+# Variables that will be used on ffw-prod
+[ffw-prod:vars]
+ansible_ssh_pass=Hb-DrhJGJ5u9c-ZVUO5P_1TyOybeqomc
+
+
+# Variables that will be applied to all servers
+[multi:vars]
+ansible_ssh_user=vagrant
+ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+
+
+# Variable that will be applied to all alfa Elastic Search servers
+[alfa-Elastic-all:vars]
+ansible_connection=ssh
+ansible_ssh_user=vagrant
+ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+
+
+
