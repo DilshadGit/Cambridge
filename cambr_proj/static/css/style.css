@@ -11,11 +11,31 @@
 	color: #fff;
 }
 
-.index {
+div.index {
 	min-height: 300px;
 }
 
 footer.footer {
 	height: 140px;
 	background-color: #004080;
+}
+
+footer .col-md-4 li, p {
+	padding-top: 40px;
+}
+
+footer li {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+footer address strong {
+	margin-top: 20px;
+	padding-top: 50px;
+	color: #fff;
+	text-align: center;
+}
+
+footer a {
+	color: #fff;
 }

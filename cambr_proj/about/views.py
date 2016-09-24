@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 def index_page(request):
 	context = ''
-	return render(request, '../templates/index.html', context)
+	return render(request, 'index.html', context)
 
 
 def what_we_do(request):
