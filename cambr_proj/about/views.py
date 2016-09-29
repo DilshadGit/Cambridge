@@ -4,10 +4,10 @@ from django.shortcuts import render
 
 
 def index_page(request):
-	context = {
-		'hello': 'Welcome'
-	}
-	return render(request, 'index.html', context)
+    context = {
+        'hello': 'Welcome'
+    }
+    return render(request, 'index.html', context)
 
 
 # def what_we_do(request):
