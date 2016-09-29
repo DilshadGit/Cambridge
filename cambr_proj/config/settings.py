@@ -148,5 +148,3 @@ LOGIN_REDIRECT_URL = '/'
 
 # crispy forms tags settings
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
-
-# CRISPY_TEMPLATE_PACK = 'uni_form'

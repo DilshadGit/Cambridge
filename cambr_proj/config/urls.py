@@ -19,12 +19,15 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf.urls.static import static
 
+from about.views import index_page
 
 urlpatterns = [
     url(r'', include('about.urls', namespace='about')),
     url(r'^contact/', include('contact.urls', namespace='contact')),
     url(r'^admin/', admin.site.urls),
 ]
+
+
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,
                           document_root=settings.STATIC_ROOT)
