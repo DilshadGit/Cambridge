@@ -53,6 +53,12 @@ your machines. So in the console that you used  to type 'vagrant up' do:
 /> vagrant ssh
 
 This will ssh you onto that machine as the 'vagrant' user.
+This will allow you to run all machines defined in your vagrant file.
+Or if you want to run a specific machine state the host name given in
+the Vagrantfile in the command like this:
+
+/> vagrant ssh alfaES1-7
+
 
 
 

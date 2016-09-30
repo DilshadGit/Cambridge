@@ -2,11 +2,14 @@
 # ************** Setup all host and IP names for servers *****************
 # ************************************************************************
 
-[example]
-188.166.145.32
 
-[example2]
-127.0.0.1
+# Example server
+#[example]
+#188.166.145.32
+
+# Example server 2
+#[example2]
+#127.0.0.1
 
 # Application servers
 [app]
@@ -17,47 +20,77 @@
 [db]
 192.168.60.6
 
-# Alfa Aesar ElasticSearch server with V1.7 ES Kiban 4.6 & Sense & Marvel
-[alfa-elasticV1-7]
-192.168.60.30
 
-# Alfa Aesar ElasticSearch server with V2.4 ES Kiban 4.6 & Sense & Marvel running as master.
-[alfa-elasticV2-4-master]
-192.168.60.31
+# ************************************************************************
+# **************     Setup all Free Flow Wine VM's       *****************
 
-# Alfa Aesar ElasticSearch server with V2.4 ES running as a replication node.
-[alfa-elasticV2-4-rep-1]
-192.168.60.32
+# Free Flow Wines Development Server VM
+[ffw-dev-vm]
+192.168.60.10
 
-# Alfa Aesar ElasticSearch server with V1.7 ES running as a replication node.
-[alfa-elasticV2-4-rep-2]
-192.168.60.33
+# Free Flow Wines Production Server VM
+[ffw-prod-vm]
+192.168.60.20
 
-# Alfa Aesar ElasticSearch server with V1.7 ES running as a replication node.
-[alfa-elasticV2-4-rep-3]
-192.168.60.34
+# Free Flow Wines VM 1
+[ffw-vm1]
+192.168.60.110
+
+# Free Flow Wines VM 2
+[ffw-vm2]
+192.168.60.210
+
+
+# ************************************************************************
+# ************** Setup all Free Flow Wine Digital Oceans *****************
+
+# Free Flow Wines Digital Ocean Production Server
+# This machine is setup from N.Herriot account and running Ubuntu 14.5 LTR 27th Sep 2016
+[ffw-prod]
+138.68.131.184
+
+# Free Flow Wines Digital Ocean Test Server
+# This machine is setup from Dilshad Abdulla's account and running Ubuntu 14.3 LTR
+[ffw-test]
+178.62.29.243
+
+
+# ************************************************************************
+# *********** Setup all Cambridge Home Start Digital Oceans **************
+
+# Cambridge Home Help Digital Ocean Test Server
+# This machine is setup from Nicholas Herriot's account and running Ubuntu 14.5 LTR
+[chh-dev]
+139.59.170.74
+
+
 
 
 # ************************************************************************
 # ****************** Setup all groups for each server ********************
 # ************************************************************************
 
-#Group 'multi' with all servers
-[multi:children]
-app
-db
 
-#Group 'alfa-ElasticV2-all' with master and replication nodes
-[alfa-ElasticV2-all:children]
-alfa-elasticV2-4-master
-alfa-elasticV2-4-rep-1
-alfa-elasticV2-4-rep-2
-alfa-elasticV2-4-rep-3
+#Group 'ffw-all' with all free flow wine servers
+[ffw-all:children]
+ffw-dev-vm
+ffw-prod-vm
+ffw-prod
+ffw-test
+ffw-vm1
+ffw-vm2
 
-#Group 'alfa-Elastic-all' with all ElasticSearch V2 and V1 servers
-[alfa-Elastic-all:children]
-alfa-ElasticV2-all
-alfa-elasticV1-7
+#Group 'ffw-all-vm' with all free flow wine servers that are virtual machines
+[ffw-all-vm:children]
+ffw-dev-vm
+ffw-prod-vm
+ffw-vm1
+ffw-vm2
+
+#Group 'ffw-all-vm' with all free flow wine servers that are droplets
+[ffw-all-drop:children]
+ffw-prod
+ffw-test
 
 
 # ************************************************************************
@@ -66,20 +99,22 @@ alfa-elasticV1-7
 
 # Variables that will be used on ffw-prod
 [ffw-prod:vars]
-ansible_ssh_pass=Hb-DrhJGJ5u9c-ZVUO5P_1TyOybeqomc
+#ansible_ssh_pass=Hb-DrhJGJ5u9c-ZVUO5P_1TyOybeqomc
+
+# Variables that will be used on ffw-test
+[ffw-test:vars]
+ansible_ssh_user=root
 
 
-# Variables that will be applied to all servers
-[multi:vars]
+# Variables that will be used on chh-dev
+[chh-dev:vars]
+ansible_ssh_user=root
+
+
+# Variables that will be applied to all free flow wines VM servers
+[ffw-all-vm:vars]
 ansible_ssh_user=vagrant
+ansible_ssh_pass=vagrant
 ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
-
-
-# Variable that will be applied to all alfa Elastic Search servers
-[alfa-Elastic-all:vars]
-ansible_connection=ssh
-ansible_ssh_user=vagrant
-ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
-
 
 
