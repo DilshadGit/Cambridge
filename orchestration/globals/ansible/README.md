@@ -84,6 +84,21 @@ All you need to do now to complete
 /> ansible-playbook playbook.yml
 
 
+## Frequently Asked Questions
+
+1) The setup file has already been run - do I need to run it again for my machine?
+
+No you don't. Setup will add the users chh_admin and chh_cms with appropriate passwords. It will then remove 
+the ability for root to ssh onto the machine. But don't worry, you can still access the machine with the
+non root user accounts and 'su root' once on the machine if you have to.
+You will need to add your public keys to the machine for chh_admin and chh_cms so that you can run other 
+playbook files. To do this:
+* copy your id_rsa.pub file in directory ~/.ssh/ to the folder ~/<your virtual env>/Cambridge/orchestration/vars
+* run the playbook addMyPubKey.yml with:  /> ansible-playbook addMyPubKey.yml
+
+
+
+
 
 
 
