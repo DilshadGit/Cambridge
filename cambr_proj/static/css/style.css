@@ -12,6 +12,10 @@ li.logo-container img {
 	color: #991f00;
 	font-weight: bold;
 }
+header .main-menu-container .main-menu li .sub-menu {
+	background-color: none;
+	background: #991f00;
+}
 
 /*Title - right*/
 a.btn.donate-now {
@@ -31,7 +35,47 @@ div.banner img {
 	position: relative;
 }
 
+/* Body content */
+
+div.col-sm-8 p {
+	color: #000;
+	text-align: justify;
+}
+
+section.section {
+	margin-top: 30px;
+}
+
+.col-sm-8 img {
+	width: 550px;
+	height: 350px;
+	margin: 15px;
+}
+
+button.btn.btn-info.pull-right.return {
+	background-color: none;
+	background: orange;
+	border-radius: 5px;
+}
+
+div.btn.btn-primary.pull-right.readmore {
+	background-color: none;
+	background: #004080;
+	border-radius: 5px;
+}
+
+a.btn.readmore {
+	background-color: none;
+	background: #004080;
+	border-radius: 5px;
+}
+
 /*Footer menu*/
+
+div.footer-menu {
+	background-color: none;
+	background: #004080;
+}
 
 .large-12.medium-12.small-12.columns {
 	padding-bottom: 20px;

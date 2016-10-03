@@ -3,6 +3,7 @@
 
 {% block content %}
 
+
 <div class="row">
 	<div class="col-sm-8">
 			{% if messages %}
@@ -14,12 +15,12 @@
 			{% endif %}
 			<h3>{{title}} <small class="pull-right"><i>{{create_date}}</i></small></h3>
 			{% if image %}
-				<img src="{{image.url}}" class="img-responsive">
+				<img src="{{image.url}}" class="img-responsive pull-right">
 			{% endif %}
-			<p>{{content|linebreaks|300}}</p>
+			<p>{{content|linebreaks}}</p>
 			
 			<a href="{% url 'post:list_post' %}">
-				<button class="btn btn-info pull-right">Return</button>
+				<button class="btn btn-info pull-right return">Return</button>
 			</a><br/>
 
 	</div>

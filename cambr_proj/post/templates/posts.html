@@ -27,7 +27,7 @@
 			{% endif %}
 			<p>{{post.content|linebreaks|truncatechars:300}}</p>
 			<a href="{% url 'post:details' slug=post.slug %}">
-				<div class="btn btn-primary pull-right">Read More </div>
+				<div class="btn btn-primary pull-right readmore">Read More </div>
 			</a>
 			<br/><hr/>
 
