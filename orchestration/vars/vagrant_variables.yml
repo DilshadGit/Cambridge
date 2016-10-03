@@ -1,5 +1,13 @@
 # Elasticsearch Ansible Variables
 
+ubuntu_common_deploy_public_keys: ~/.ssh/id_rsa.pub                               # This tells our playbook files where to get your ssh public key from
+ubuntu_common_ssh_port: 22                                                        # If we configure this port our setup.yml file will configure ssh on a different port
+
+adminuser: 'chh_admin'
+adminpassword: 'gyACXJaQZC2L'
+cmsuser: 'chh_cms'
+cmspassword: 'MyVroGJPMdP2'
+
 elasticsearch_version: 1.7.5
 elasticsearch_java_home: /usr/lib/jvm/java-8-oracle
 elasticsearch_heap_size: 1g
