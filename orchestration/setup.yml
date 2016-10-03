@@ -46,23 +46,23 @@
       - '{{adminuser}}'
       - '{{cmsuser}}'
 
-  # Add our admin user to the 'sudo' users file.
-  #- name: Sudoers | update sudoers file and validate
-  #  lineinfile: "dest=/etc/sudoers
-  #    insertafter=EOF
-  #    line='{{ adminuser }} ALL=(ALL) NOPASSWD: ALL'
-  #    regexp='{{ adminuser }} ALL=(ALL) NOPASSWD: ALL'
-  #    state=present"
-  #  become: true
+  # Add our admin user to the 'sudo' users file and allow them to not require passwords for sudo access.
+  - name: Sudoers | update sudoers file and validate
+    lineinfile: "dest=/etc/sudoers
+      insertafter=EOF
+      line='{{ adminuser }} ALL=(ALL) NOPASSWD: ALL'
+      regexp='{{ adminuser }} ALL=(ALL) NOPASSWD: ALL'
+      state=present"
+    become: true
 
   # We need to stop a user loging in with root access via SSH. Someone could brute force attack our server on our root
   # accont
-  - name: Disallow root SSH access
-    lineinfile: dest=/etc/ssh/sshd_config
-              regexp="^PermitRootLogin"
-              line="PermitRootLogin no"
-              state=present
-    notify: Restart ssh
+  #- name: Disallow root SSH access
+  #  lineinfile: dest=/etc/ssh/sshd_config
+  #            regexp="^PermitRootLogin"
+  #            line="PermitRootLogin no"
+  #            state=present
+  #  notify: Restart ssh
 
 
   # if we have a variable setup in our vars directory to change our default SSH port it will change it otherwise it will

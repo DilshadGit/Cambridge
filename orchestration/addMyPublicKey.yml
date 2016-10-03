@@ -1,13 +1,15 @@
+# This script will provision your public SSH key onto the remote machine for the admin and cms users.
 ---
 - hosts: chh-dev
-  user: cch_admin
+  user: '{{adminuser}}'
 
   vars_files:
     - vars/vagrant_variables.yml
 
   vars:
-    adminuser: 'cch_admin'
-    adminpassword: 'gyACXJaQZC2L'
+    ansible_ssh_user: chh_admin                               # We need to override this to use the admin user as
+                                                              # the root account will be locked by this point
+
   tasks:
   # Setup to users on the ffw-test server
   #- name: Setup | create user chh_admin and chh_cms
@@ -36,8 +38,8 @@
       manage_dir=no
     become: true
     with_items:
-      - chh_admin
-      - chh_cms
+      - '{{adminuser}}'
+      - '{{cmsuser}}'
 
   # Add our admin user to the 'sudo' users file.
   #- name: Sudoers | update sudoers file and validate
