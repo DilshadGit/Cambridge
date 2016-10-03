@@ -11,23 +11,6 @@
                                                               # the root account will be locked by this point
 
   tasks:
-  # Setup to users on the ffw-test server
-  #- name: Setup | create user chh_admin and chh_cms
-  #  command: useradd -m {{ item }} creates=/home/{{ item }}
-  #  become: true
-  #  become_method: sudo
-  #  with_items:
-  #    - chh_admin
-  #    - chh_cms
-
-  # Setup passwords for both user 'ffw_admin' and 'ffw_user' on our ffw-test server
-  #- name: Setup | set passwords for chh_admin and chh_user
-  #  shell: usermod -p $(echo '{{ item.createpassword }}' | openssl passwd -1 -stdin) {{ item.createuser }}
-  #  become: true
-  #  become_method: sudo
-  #  with_items:
-  #    - { createpassword: 'gyACXJaQZC2L', createuser: 'chh_admin' }
-  #    - { createpassword: 'MyVroGJPMdP2', createuser: 'chh_cms' }
 
   # Setup an public key for this remote machine by copying the public key of this machine to the remote machine.
   # We need to have our id_rsa.pub file within the vars directory of this setup.yml file.
@@ -40,13 +23,4 @@
     with_items:
       - '{{adminuser}}'
       - '{{cmsuser}}'
-
-  # Add our admin user to the 'sudo' users file.
-  #- name: Sudoers | update sudoers file and validate
-  #  lineinfile: "dest=/etc/sudoers
-  #    insertafter=EOF
-  #    line='{{ adminuser }} ALL=(ALL) NOPASSWD: ALL'
-  #    regexp='{{ adminuser }} ALL=(ALL) NOPASSWD: ALL'
-  #    state=present"
-  #  become: true
 
