@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-sm-8">
+			{% if messages %}
+			<ul class="messages">
+			    {% for message in messages %}
+			    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+			    {% endfor %}
+			</ul>
+			{% endif %}
+			<h3>{{title}} <small class="pull-right"><i>{{create_date}}</i></small></h3>
+			{% if image %}
+				<img src="{{image.url}}" class="img-responsive">
+			{% endif %}
+			<p>{{content|linebreaks|300}}</p>
+			
+			<a href="{% url 'post:list_post' %}">
+				<button class="btn btn-info pull-right">Return</button>
+			</a><br/>
+
+	</div>
+</div>
+{% endblock content %}

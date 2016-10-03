@@ -23,6 +23,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'', include('about.urls', namespace='about')),
     url(r'^contact/', include('contact.urls', namespace='contact')),
+    url(r'^posts/', include('post.urls', namespace='post')),
     url(r'^admin/', admin.site.urls),
 ]
 if settings.DEBUG:

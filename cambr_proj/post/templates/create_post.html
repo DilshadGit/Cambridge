@@ -1,0 +1,27 @@
+
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row">
+	<div class="col-sm-8 ">
+	<h1>Create Post</h1>
+	{% if messages %}
+		<div class="messages">
+			<ul class="messages">
+			    {% for message in messages %}
+			    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+			    {% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+
+	<form action="" method="POST" enctype='multipart/form-data'>{% csrf_token %}
+	{{form|crispy}}
+	<br/>
+	<input type="submit" class="btn btn-primary pull-right" name="Create Post" value="Create Post">
+	</form>
+</div>
+</div>
+
+{% endblock content %}
