@@ -53,14 +53,14 @@ a machine
 ### 1) Ansible Connect With Root
 
 We will connect ansible to our machine in this instance it will be 'ubuntuCambridgeHomeStart' on digital
-oceans with the IP address of: 139.59.170.74. The machine name that ansible will lookup for this IP address
+oceans with the IP address of: 104.236.14.123. The machine name that ansible will lookup for this IP address
 is 'chh-dev' which is defined in the hosts file.
 Ansible will try and connect as 'root'. However we will not use a 'root' password, we will allow the machines
 to swap pub/private key exchange via ssh. This is the only manual step you will have to do. First manually add
 your SSH public key to the remote machine (You should have already created your pub/private key on your local
 machine).
 
-/> ssh-copy-id root@139.59.170.74
+/> ssh-copy-id root@104.236.14.123
 
 You will be prompted for the root password. See your admin guy to get the root password and allow you to add
 your public key to the remote machine.
@@ -93,8 +93,23 @@ the ability for root to ssh onto the machine. But don't worry, you can still acc
 non root user accounts and 'su root' once on the machine if you have to.
 You will need to add your public keys to the machine for chh_admin and chh_cms so that you can run other 
 playbook files. To do this:
-* copy your id_rsa.pub file in directory ~/.ssh/ to the folder ~/<your virtual env>/Cambridge/orchestration/vars
-* run the playbook addMyPubKey.yml with:  /> ansible-playbook addMyPubKey.yml
+
+* run the playbook addMyPubKey.yml with:  /> ansible-playbook addMyPublicKey.yml --ask-pass
+
+You will be prompted for the chh_admin password. The script will then setup your public key for that machine
+on the remote machine. To test it, you can ssh as user chh_admin. You should not need a password.
+
+2) When I run the setup.yml script it fails to connect! I thought Ansible was idempotent? 
+
+It is but this script does everything as 'root'. It then blocks the ability of 'root' to ssh to that machine 
+for securit purposes. This script is a one time run script. You can add the ability of root to ssh on the 
+machine via the /etc/ssh/sshd_config file. 
+
+"PermitRootLogin yes"
+
+Then restart SSH with:
+
+/>   sudo  service ssh restart
 
 
 
