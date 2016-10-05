@@ -40,7 +40,7 @@
     # This restarts our nginx which servers requests for our web server
     # Reload Nginx to fully enable our site
     - name: Reload Nginx to enable the site
-      become_user: adminuser
+      become_user: root
       service: name=nginx state=reloaded enabled=yes
 
     # This is our re-start. Same as start but start calls up the configure after it's started

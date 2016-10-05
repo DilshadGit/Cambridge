@@ -13,8 +13,9 @@
     dbuser: chh_db_user                                       # this is used to setup the database user in postres
     dbpassword: IPq52l7a                                      # this is used to setup the database password TODO put this in a keepass file
     environment_path: /home/chh_cms/home_start_venv           # this is the virtual environment project folder
-    environment_name : env_projectname
+    environment_name : home_start_venv
     project_root: ~/HomeStartCambridge                        # this is the root folder where the source code is
+    project_root_name: HomeStartCambridge
     project_name: cambr_proj
     project_repo: https://github.com/DilshadGit/Cambridge.git #https://github.com/nherriot/FreeFlowWines.git
     django_settings: config.settings                          # this is where we get our settings.py from
@@ -85,11 +86,11 @@
       become_user: root
       file: path=/etc/init/gunicorn.conf state=absent
 
-    - name: Remove Directory chhprojectenv
+    - name: Remove Directory HomeStartCambridge and home_start_venv
       become_user: '{{ cmsuser }}'
       file: path=~/{{ item }} state=absent
       with_items:
-        - home_start_venv
-        - '{{project_root}}'
+        - '{{environment_name}}'
+        - '{{project_root_name}}'
 
 
