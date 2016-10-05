@@ -86,7 +86,7 @@
       file: path=/etc/init/gunicorn.conf state=absent
 
     - name: Remove Directory chhprojectenv
-      become_user: ffw_cms
+      become_user: '{{ cmsuser }}'
       file: path=~/{{ item }} state=absent
       with_items:
         - home_start_venv
