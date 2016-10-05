@@ -55,6 +55,16 @@
       state=present"
     become: true
 
+  # Since this could be on a fresh Digital Ocean Machine we should ensure we setup a proper bash shell! And not that crap
+  # shell you normally get with no arrow up or tab complet commands. So lets do that for both users.
+  - name: Setup a bash sell for both users
+    shell: sudo usermod -s /bin/bash {{ item }}
+    become: true
+    become_method: sudo
+    with_items:
+      - '{{adminuser}}'
+      - '{{cmsuser}}'
+
   # We need to stop a user loging in with root access via SSH. Someone could brute force attack our server on our root
   # accont
   #- name: Disallow root SSH access

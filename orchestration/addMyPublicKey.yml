@@ -7,7 +7,7 @@
     - vars/vagrant_variables.yml
 
   vars:
-    ansible_ssh_user: chh_admin                               # We need to override this to use the admin user as
+    ansible_ssh_user: '{{adminuser}}'                         # We need to override this to use the admin user as
                                                               # the root account will be locked by this point
 
   tasks:

@@ -1,59 +1,29 @@
-
-  tasks:
-
-    - name: Installing Java Open JDK
-      #apt: name=openjdk-8-jdk state=present
-      apt: name=openjdk-7-jre state=present
-
-    - name: Install ElasticSearch 1.7 from our 'deb' file.
-      apt: deb="/home/vagrant/alfacms/elasticsearch-1.7.5.deb"
-      #sudo: true
-
-    - name: Start ElasticSearch Engine
-      service: name=elasticsearch state=started enabled=yes
-
-    - name: Install a repo for Kinaba 4.1
-      apt_repository: repo='deb https://packages.elastic.co/kibana/4.1/debian stable main' state=present filename='kibana' validate_certs=no
-
-    - name: update apt cache and key ring for Kiban
-      apt: update_cache=yes
-
-    - name: Install Kibana from Apt
-      apt: name=kibana state=present allow_unauthenticated=yes
-      #ignore_errors: yes
-
-    - name: marvel | Removing Marvel Plugin if it exists
-      shell: bin/plugin --remove marvel
-        chdir={{ elasticsearch_home_dir }}
-      ignore_errors: yes
-
-    - name: marvel | Installing Marvel Plugin - latest version for this ES instance
-      shell: bin/plugin -i elasticsearch/marvel/{{ elasticsearch_plugin_marvel_version }}
-        chdir={{ elasticsearch_home_dir }}
-      register: marvel_plugins_installed
-      changed_when: "'Installed' in marvel_plugins_installed.stdout"
-      failed_when: "marvel_plugins_installed.rc != 0 and marvel_plugins_installed.stdout.find('already exists. To update the plugin') == -1"
-
-
+# This file will install postgres, virtual env, nginx, gunicorn, pip and django onto a vanilla system. It will then
+# pull down from the latest software in 'master', collect static files, do an initial migration and then bring up all
+# the services required.
+# it requires a user who has root privillages who is not root and it would be helpfull if there is already a public key
+# setup for the ssh connection too between your host computer and the destination
 
 ---
 - hosts: chh-dev
   user: '{{adminuser}}'
-  become: true
+  become: true                                                # This will tell ansible to become 'sudo' to issue commands on the machine
+
+  vars_files:
+    - vars/vagrant_variables.yml
 
   vars:
+    ansible_ssh_user: '{{adminuser}}'                         # We need to override this to use the admin user to SSH to the machine as
+                                                              # the root account will be locked via SSH by this point
     dbname: chh_db_03102016                                   # this is used to setup the database name in postgres
     dbuser: chh_db_user                                       # this is used to setup the database user in postres
     dbpassword: IPq52l7a                                      # this is used to setup the database password TODO put this in a keepass file
     environment_path: /home/chh_cms/home_start_venv           # this is the virtual environment project folder
     environment_name : env_projectname
     project_root: ~/HomeStartCambridge                        # this is the root folder where the source code is
-    project_name: campr_proj
+    project_name: cambr_proj
     project_repo: https://github.com/DilshadGit/Cambridge.git #https://github.com/nherriot/FreeFlowWines.git
     django_settings: config.settings                          # this is where we get our settings.py from
-
-  vars_files:
-    - vars/vagrant_variables.yml
 
 
   pre_tasks:
@@ -149,17 +119,17 @@
     # Setup django and gunicorn wsgi server this has to install virtual env, then as the CMS user it then uses the PIP
     # module to create the virtual environment and the python version that will be used for this.
     - name: Install a virtual environment
-      become_user: {{cmsuser}}
+      #become_user: '{{cmsuser}}'
       pip: name=virtualenv state=present
 
-    - name: Create virtualenv with django installed in it as ffw_cms user
-      become_user: {{cmsuser}}
+    - name: Create virtualenv with django installed in it as cch_cms user
+      become_user: '{{cmsuser}}'
       pip: name=django version=1.9.2 virtualenv={{environment_path}} virtualenv_python=python2.7
 
 
     # likewise we can install all packages we need from git by taking our build straight from the master branch
     - name: Clone project from git
-      become_user: {{cmsuser}}
+      become_user: '{{cmsuser}}'
       git:
         repo={{project_repo}}
         dest={{project_root}}
@@ -171,31 +141,29 @@
 
     # This installs all our packages from the requirements.txt file in our repository
     - name: Install dependencies into virtualenv (i.e. install requirements.txt)
-      become_user: {{cmsuser}}
+      become_user: '{{cmsuser}}'
       action: pip requirements={{project_root}}/{{project_name}}/requirements.txt virtualenv={{environment_path}} state=present
 
     # Run the makemigrations on the insalled django app in 'django_dir'. This only migrates the initial django DB
     - name: Django Migrate DB Tables - only migrate initial tables
-      become_user: {{cmsuser}}
+      become_user: '{{cmsuser}}'
       django_manage: command=migrate {{item}}
         virtualenv={{environment_path}}
         app_path={{project_root}}/{{project_name}}
       with_items:
-        - accounts
+        - about
         - admin
         - auth
-        - cms
+        - contact
         - contenttypes
-        - profiles
-        - registration
+        - post
         - sessions
-        - sites
 
 
     # Collect static files from the installed directories to where ther are served from. This is controlled in the
     # settings.py file
     - name: Django Collectstatic Files
-      become_user: ffw_cms
+      become_user: '{{cmsuser}}'
       django_manage: command=collectstatic
         virtualenv={{environment_path}}
         app_path={{project_root}}/{{project_name}}
@@ -204,18 +172,18 @@
 
     # Create an initial superuser.
     - name: Django Create Super User
-      become_user: ffw_cms
-      django_manage: command="createsuperuser --noinput --username=admin --email=admin@example.com"
+      become_user: '{{cmsuser}}'
+      django_manage: command="createsuperuser --noinput --username=nherriot --email=Nicholas.Herriot@gmail.com"
         virtualenv={{environment_path}}
         app_path={{project_root }}/{{project_name}}
 
     # Configure our gunicorn wsgi server. We need to copy our gunicorn.conf file across to the server.
-    - name: Copy 'gunicorn.con' And 'ffwecommerce' Nginx Config To Our Server
+    - name: Copy 'gunicorn.con' And 'chhecommerce' Nginx Config To Our Server
       become_user: root
       copy: src={{item.file_name}} dest={{item.destination_directory}} owner=root group=root mode="u=r,g=r,o=rw"
       with_items:
-        - { file_name: 'gunicorn.conf', destination_directory: '/etc/init' }
-        - { file_name: 'ffwecommerce', destination_directory: '/etc/nginx/sites-available' }
+        - { file_name: 'vars/gunicorn.conf', destination_directory: '/etc/init' }
+        - { file_name: 'vars/chhecommerce', destination_directory: '/etc/nginx/sites-available' }
 
 
     # Start the gunicorn wsgi server.
@@ -234,7 +202,7 @@
     # the live working path.
     - name: Link ffecomerce Nginx config file in sites-available to sites-enabled
       become_user: root
-      file: src=/etc/nginx/sites-available/ffwecommerce dest=/etc/nginx/sites-enabled/ffwecommerce state=link
+      file: src=/etc/nginx/sites-available/chhecommerce dest=/etc/nginx/sites-enabled/chhecommerce state=link
       notify: Reload Nginx to enable the site
 
     # Reload Nginx to fully enable our site
