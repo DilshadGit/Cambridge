@@ -7,18 +7,10 @@
 		<h1>News</h1>
 		
 		{% for post in query_set %}
-			<div class=""> <!-- page-header -->
-				<!-- The hard code L-33-->
-			  	<!-- <h4>
-			  		<a href="/post/{{post.slug}}/">{{post.title}}</a> 
-			  		<small>This is Hard coded</small>
-			  	</h4> -->
-			  	<h4><a href="{% url 'post:details' slug=post.slug %}">{{post.title}}</a> 
-			  		<small>Daynamic code</small>
+			<div class="">
+			  	<h4><a href="{% url 'post:detail' slug=post.slug %}">{{post.title}}</a> 
+			  		<small>{{user}}</small>
 			  	</h4>
-			 	<!-- <h4><a href="{{ post.get_absolute_url }}">{{post.title}}</a> 
-			 		<small>Absolute Path and reverse</small>
-			 	</h4> -->
 			</div>
 			
 			<i class="pull-right">{{post.create_date|timesince}}</i><br/>
@@ -26,10 +18,12 @@
 				<img src="{{image.url}}" class="img-responsive">
 			{% endif %}
 			<p>{{post.content|linebreaks|truncatechars:300}}</p>
-			<a href="{% url 'post:details' slug=post.slug %}">
+			<a href="{% url 'post:detail' slug=post.slug %}">
 				<div class="btn btn-primary pull-right readmore">Read More </div>
 			</a>
 			<br/><hr/>
+
+			
 
 		{% endfor %}
 

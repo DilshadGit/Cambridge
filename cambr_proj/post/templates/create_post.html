@@ -17,8 +17,8 @@
 	{% endif %}
 
 	<form action="" method="POST" enctype='multipart/form-data'>{% csrf_token %}
-	{{form|crispy}}
-	<br/>
+		{{form|crispy}}
+		<br/>
 	<input type="submit" class="btn btn-primary pull-right" name="Create Post" value="Create Post">
 	</form>
 </div>

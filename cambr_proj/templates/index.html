@@ -2,9 +2,14 @@
 {% load staticfiles %}
 
 
-{% include 'carousel.html' %}
 
 {% block content %}
+
+
+{% block carousel %}
+	{% include 'carousel.html' %}
+{% endblock %}
+
 
 <div class="home-cta">
 	<div class="row">
@@ -13,12 +18,12 @@
 			<div class="post-content">
 				<a href="https://doncare.org.au/our-patron" target="_blank">
 					<div class="rounded-img img-bg">
-						<img src="https://rgxkdk.corednacdn.com/web_images/ads_0001461726596.jpg"  alt="Our Patron">
+						<img src="{% static 'images/aaron.jpg' %}"  alt="Our Patron">
 					</div>
 				</a>	
 		
-				<h1 class="title"><a href="homestartcambridgeshire.co.uk/our-patron">Our Patron</a></h1>
-				<a href="https://doncare.org.au/our-patron" class="btn readmore">Read More</a>
+				<h1 class="title"><a href="homestartcambridgeshire.co.uk/our-patron">Leadership</a></h1>
+				<!-- <a href="https://doncare.org.au/our-patron" class="btn readmore">Read More</a> -->
 			</div>
 		</div>
 
@@ -31,7 +36,7 @@
 				</a>		
 	
 				<h1 class="title"><a href="imatter">Leadership</a></h1>
-				<a href="imatter" class="btn readmore">Read More</a>
+				<!-- <a href="imatter" class="btn readmore">Read More</a> -->
 			</div>
 		</div>
 
@@ -43,7 +48,7 @@
 			</a>
 
 			<h1 class="title"><a href="/news/47th-annual-general-meeting">General Meeting</a></h1>
-			<a href="imatter" class="btn readmore">Read More</a>
+			<!-- <a href="imatter" class="btn readmore">Read More</a> -->
 		</div>
 
 		<div class="large-3 medium-3 small-12 columns">
@@ -54,11 +59,11 @@
 			</a>
 
 			<h1 class="title"><a href="/news/blush-gala-ball">Event Metting</a></h1>
-			<a href="imatter" class="btn readmore">Read More</a>
+			<!-- <a href="imatter" class="btn readmore">Read More</a> -->
 		</div>
 	</div>
 </div>
-
+<br><br>
 
 <div class="our-partners-container">
 	<div class="row">

@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Application definition
 
@@ -37,10 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'about',
     'contact',
     'crispy_forms',
     'post',
+    'registration',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -138,16 +143,27 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media-cdn')
 
-# django registerations
-ACCOUNT_ACTIVATION_DAYS = 7
 
-REGISTRATION_AUTO_LOGIN = True
-
-SITE_ID = 1
-
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/accounts/login/'
 
 # crispy forms tags settings
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
-# CRISPY_TEMPLATE_PACK = 'uni_form'
+# Registration package
+
+# If True, users can register
+REGISTRATION_OPEN = True
+
+# One-week activation window; you may, of course, use a different value
+ACCOUNT_ACTIVATION_DAYS = 7
+
+# If True, the user will be automatically logged in.
+REGISTRATION_AUTO_LOGIN = True
+
+SITE_ID = 1
+
+# The page you want users to arrive at after they successful log in
+LOGIN_REDIRECT_URL = '/'
+# The page users are directed to if they are not logged in,
+# and are trying to access pages requiring authentication
+LOGIN_URL = '/accounts/login/'

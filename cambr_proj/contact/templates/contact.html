@@ -6,27 +6,11 @@
 <div class="row">
 	<div class="col-md-9">
 		<h1>Contact Us</h1>
-		<{{ form.non_field_errors }}
-			<div class="fieldWrapper">
-			    {{ form.subject.errors }}
-			    <label for="{{ form.subject.id_for_label }}">Email subject:</label>
-			    {{ form.subject }}
-			</div>
-			<div class="fieldWrapper">
-			    {{ form.message.errors }}
-			    <label for="{{ form.message.id_for_label }}">Your message:</label>
-			    {{ form.message }}
-			</div>
-			<div class="fieldWrapper">
-			    {{ form.sender.errors }}
-			    <label for="{{ form.sender.id_for_label }}">Your email address:</label>
-			    {{ form.sender }}
-			</div>
-			<div class="fieldWrapper">
-			    {{ form.cc_myself.errors }}
-			    <label for="{{ form.cc_myself.id_for_label }}">CC yourself?</label>
-			    {{ form.cc_myself }}
-			</div>
+		<form action="/your-name/" method="POST" accept-charset="utf-8" enctype="multipart/form-data">
+		{% csrf_token %}
+			{{ form_class|crispy }}
+			<input type="submit" class="btn btn-primary" value="Send" />
+		</form>
 	</div>
 	<div class="col-md-3">
 		<address>
