@@ -10,7 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
-import os
+import os, socket
+
+# A list of development machines that will make sure we use a 'non production' settings file. Add your machine name to
+# the list to make this settings file a 'dev' build only.
+
+
+DEVELOPER_MACHINES = ['Zenbook-UX32A', 'dilmac-vb', 'dilmac', 'my-mac-machine', 'my-linux-machine']
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,31 +29,114 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'cq(3adrx@qnwi5mmb5j^*-9pif8vleo-lo#s^3^zra5c*%-f=j'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+# SECURITY WARNING: don't run with debug turned on in production!
+# Add your own computer name to this list of 'gethostname()' functions to get
+# debug to true. Otherwise this will build a 'production' settings file.
+if socket.gethostname() in DEVELOPER_MACHINES:
+    print "\n***** WARNING! This is a non-production build *****"
+    DEBUG = True
+
+    # Database
+    # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
+    # Setup the database as a developer machine.django.contrib.staticfiles
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'ffw',
+            'USER': 'ffw_user',
+            'PASSWORD': 'ffw_user',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
+    }
+
+    # Static files (CSS, JavaScript, Images)
+    # https://docs.djangoproject.com/en/1.9/howto/static-files/
+    STATIC_URL = '/static/'
+
+    # Application definition
+
+    INSTALLED_APPS = [
+        'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+        'django.contrib.sites',
+        'about',
+        'contact',
+        'crispy_forms',
+        'post',
+        'registration',
+    ]
+
+# **************************************************************************************************************************
+# ************************************ This section will be what the Live server runs **************************************
+# **************************************************************************************************************************
+
+else:
+
+    print "\n***** INFORMATION: PRODUCTION BUILD DEPLOYMENT *****"
+
+    # Set allowed hosts so that we can verify where requests are coming from.
+    ALLOWED_HOSTS = [
+        'localhost',
+        '127.0.0.1',
+        'homestartcambridgeshire.co.uk',
+        '.homestartcambridgeshire.co.uk',
+        '104.236.14.123',
+        ]
+
+    DEBUG = False
+
+    # Database
+    # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
+    # Setup the database as the production machine.
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ffw_db_17022016',					# This is our database name
+        'USER': 'ffw_db_user',						# This is the user of our database
+        'PASSWORD': 'IPq52llj',						# This is the password of the database user
+        'HOST': 'localhost',
+        'PORT': '',
+         }
+    }
+
+    # Static files (CSS, JavaScript, Images)
+    # https://docs.djangoproject.com/en/1.9/howto/static-files/
+    #STATIC_URL = os.path.join(BASE_DIR, "static/")
+    STATIC_URL = '/static-cdn/'
+
+
+    # Application definition
+
+    INSTALLED_APPS = [
+        'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+        'django.contrib.sites',
+        'about',
+        'contact',
+        'crispy_forms',
+        'post',
+        'registration',
+    ]
+
+
+DEFAULT_FROM_EMAIL = "Coding For Entrepreneurs <info@home_start_cambridge.com>"
 
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# Application definition
 
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.sites',
-    'about',
-    'contact',
-    'crispy_forms',
-    'post',
-    'registration',
-]
+SITE_URL = "http://homestartcambridgeshire.co.uk"
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,17 +168,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 
 # Password validation
@@ -127,7 +206,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_URL = '/static/'
 #  Lecture 25
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
@@ -142,9 +220,6 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static-cdn')
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media-cdn')
-
-
-LOGIN_REDIRECT_URL = '/accounts/login/'
 
 # crispy forms tags settings
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
