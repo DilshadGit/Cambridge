@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+	<div class="col-sm-8 ">
+
+		{% for obj in content_data %}
+
+		<h3>{{obj.title}}</h3>
+		<img src="static{{obj.image}}" class="img-responsive pull-right"/>
+		<p>
+			{{obj.content}}
+		</p>
+
+		{% endfor %}
+
+	</div>
+</div>
+
+{% endblock content %}

@@ -22,8 +22,17 @@ a.btn.donate-now {
 	font-size: 18px;
 }
 
-a.admin {
+a.login {
 	margin-left: 200px;
+}
+
+a.logout {
+	margin-left: 80px;
+	color: red;
+}
+
+a i.fa.fa-user {
+	coloer:green;
 }
 
 /*Carousel*/
