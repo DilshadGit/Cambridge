@@ -16,10 +16,10 @@ def index_page(request):
 #     return render(request, 'about_us.html', context)
 
 
-def what_we_do(request):
+def what_wedo(request):
     queryset = WhatWeDo.objects.all()
     context = {
-        'content_data': queryset,  
+        'content_data': queryset,
     }
     return render(request, 'what_we_do.html', context)
 

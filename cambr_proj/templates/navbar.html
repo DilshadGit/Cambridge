@@ -51,11 +51,11 @@
 								<a href="#">About</a>
 								<ul class="sub-menu">
 									<li>
-										<a href="{# url 'views.what_we_do' #}">What we do!</a>
+										<a href="{% url 'about:whatwedo' %}">What we do!</a>
 									</li>
-									<li><a href="{# url 'views.voluntering' #}">Volunterring</a></li>
-									<li><a href="{# url 'views.our_team' #}">Our Team</a></li>
-									<li><a href="{# url 'views.our_board' #}">Our Board</a></li>
+									<li><a href="{% url 'about:volunter' %}">Volunterring</a></li>
+									<li><a href="{% url 'about:our_team' %}">Our Team</a></li>
+									<li><a href="{% url 'about:our_board' %}">Our Board</a></li>
 								</ul>
 							</li>
 							<li>

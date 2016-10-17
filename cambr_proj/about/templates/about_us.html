@@ -3,9 +3,17 @@
 {% block content %}
 
 <div class="row">
-	<h3></h3>
-	<p class="lead">
-		
-	</p>
+	<div class="col-md-8 large-10 medium-10 small-12 columns">
+		{% for obj in content_data %}
+
+		<h3>{{obj.title}}</h3>
+		<img src="static{{obj.image}}" class="img-responsive pull-right"/>
+		<p>
+			{{obj.content}}
+		</p>
+
+		{% endfor %}
+
+	</div>
 </div>
 {% endblock %}

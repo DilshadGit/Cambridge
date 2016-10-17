@@ -78,6 +78,13 @@ div.btn.btn-primary.pull-right.readmore {
 	margin: auto 20px;
 }
 
+input.btn.btn-primary.send.pull-right {
+	background-color: none;
+	background: #004080;
+	border-radius: 5px;
+	margin: auto 20px;
+}
+
 a.btn.readmore {
 	background-color: none;
 	background: #004080;

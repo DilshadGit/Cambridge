@@ -31,6 +31,8 @@ class WhatWeDo(models.Model):
         return self.title
 
     def get_absolute_url(self):
+        # return 'about/%s/'%(self.id)
+        # return reverse('about:whatwedo', kwargs={'id': self.id})
         return reverse('about:what_we_do', kwargs={'slug': self.slug})
 
 
@@ -53,6 +55,9 @@ class Volunterring(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    class Meta:
+        ordering = ['-create_date', '-updated']
 
 
 class OurTeam(models.Model):
@@ -106,4 +111,4 @@ def pre_save_post_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = create_slug(instance)
 
-pre_save.connect(pre_save_post_receiver, sender=WhatWeDo)
+# pre_save.connect(pre_save_post_receiver, sender=WhatWeDo)
