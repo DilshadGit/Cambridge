@@ -27,8 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-EMAIL_HOST = 'localhost'
+EMAIL_HOST = 'smtp.homestartcambridgeshire.co.uk'
+EMAIL_HOST_USER = 'office@homestartcambridgeshire.co.uk'
+EMAIL_HOST_PASSWORD = 'somepasswords'
 EMAIL_PORT = 1025
+EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Application definition
