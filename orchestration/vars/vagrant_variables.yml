@@ -8,6 +8,11 @@ adminpassword: 'gyACXJaQZC2L'
 cmsuser: 'chh_cms'
 cmspassword: 'MyVroGJPMdP2'
 
+dbname: chh_db_03102016                                   # this is used to setup the database name in postgres
+dbuser: chh_db_user                                       # this is used to setup the database user in postres
+dbpassword: IPq52l7a                                      # this is used to setup the database password TODO put this in a keepass file
+
+
 elasticsearch_version: 1.7.5
 elasticsearch_java_home: /usr/lib/jvm/java-8-oracle
 elasticsearch_heap_size: 1g

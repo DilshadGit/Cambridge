@@ -38,11 +38,18 @@
     - name: Stop Nginx to remove from memory
       become_user: root
       service: name=nginx state=stopped enabled=no
+      register: command_result
+      failed_when: "command_result|failed and 'service not found' not in command_result.msg"
+
 
     # Stop the gunicorn wsgi server and remove from memory.
     - name: Stop Gunicorn WSGI Server
       become_user: root
       service: name=gunicorn state=stopped enabled=no
+      register: command_result
+      failed_when: "command_result|failed and 'service not found' not in command_result.msg"
+
+
 
 
     # Drop the postgres database before removing software components

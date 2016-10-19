@@ -15,9 +15,6 @@
   vars:
     ansible_ssh_user: '{{adminuser}}'                         # We need to override this to use the admin user to SSH to the machine as
                                                               # the root account will be locked via SSH by this point
-    dbname: chh_db_03102016                                   # this is used to setup the database name in postgres
-    dbuser: chh_db_user                                       # this is used to setup the database user in postres
-    dbpassword: IPq52l7a                                      # this is used to setup the database password TODO put this in a keepass file
     environment_path: /home/chh_cms/home_start_venv           # this is the virtual environment project folder
     environment_name : env_projectname
     project_root: ~/HomeStartCambridge                        # this is the root folder where the source code is
@@ -61,17 +58,17 @@
 
     # This set up postgres for the first time. I
     # Setup Postgres Database on the system
-    - name: Setup Postgres DB
+    - name: Setup Postgres DB Handler
       become_user: postgres
-      postgresql_db: name={{dbname}}
+      postgresql_db: name='{{dbname}}'
 
     - name: Setup Postgres User can Access DB
       become_user: postgres
-      postgresql_user: db={{dbname}} name={{dbuser}} password={{dbpassword}} priv=ALL
+      postgresql_user: db='{{dbname}}' name='{{dbuser}}' password='{{dbpassword}}' priv=ALL
 
     - name: Ensure Postgres user does not have unnecessary privileges
       become_user: postgres
-      postgresql_user: name={{dbuser}} role_attr_flags=NOSUPERUSER,NOCREATEDB
+      postgresql_user: name='{{dbuser}}' role_attr_flags=NOSUPERUSER,NOCREATEDB
 
 
   tasks:
@@ -108,12 +105,12 @@
     # This set up postgres for the first time
     - name: Setup Postgres DB
       become_user: postgres
-      postgresql_db: name={{dbname}}
+      postgresql_db: name='{{dbname}}'
 
     - name: Setup Postgres User can Access DB
       become_user: postgres
-      postgresql_user: db={{dbname}} name={{dbuser}} password={{dbpassword}} priv=ALL
-      postgresql_user: name={{dbuser}} role_attr_flags=NOSUPERUSER,NOCREATEDB
+      postgresql_user: db='{{dbname}}' name='{{dbuser}}' password='{{dbpassword}}' priv=ALL
+      #postgresql_user: name={{dbuser}} role_attr_flags=NOSUPERUSER,NOCREATEDB
 
 
     # Setup django and gunicorn wsgi server this has to install virtual env, then as the CMS user it then uses the PIP
