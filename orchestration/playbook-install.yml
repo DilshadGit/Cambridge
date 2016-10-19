@@ -21,6 +21,7 @@
     project_name: cambr_proj
     project_repo: https://github.com/DilshadGit/Cambridge.git #https://github.com/nherriot/FreeFlowWines.git
     django_settings: config.settings                          # this is where we get our settings.py from
+    git_branch: production
 
 
   pre_tasks:
@@ -130,7 +131,7 @@
       git:
         repo={{project_repo}}
         dest={{project_root}}
-        remote=origin version=master
+        remote=origin version={{git_branch}}
 
     # Give read and write permissions to the virtual environment path
     #- name: change permissions
