@@ -26,9 +26,17 @@ a.login {
 	margin-left: 200px;
 }
 
+i.fa.fa-user {
+	color: #009933;
+}
+
 a.logout {
 	margin-left: 80px;
 	color: red;
+}
+
+span.logout {
+	color: #991f00;
 }
 
 a i.fa.fa-user {
@@ -49,6 +57,10 @@ div.banner img {
 }
 
 /* Body content */
+
+div.col-sm-8 p.content {
+	margin-right: 20px;
+}
 
 div.col-sm-8 p {
 	color: #000;
@@ -71,7 +83,35 @@ button.btn.btn-info.pull-right.return {
 	border-radius: 5px;
 }
 
+button.btn.btn-success.create {
+	background-color: none;
+	background: #009933;
+	border-radius: 5px;
+	margin: auto 10px;
+}
+
+button.btn.btn-update { 
+	background-color: none;
+	background: #0052cc;
+	border-radius: 5px;
+	margin: auto 10px;
+}
+
+button.btn.btn-delete {
+	background-color: none;
+	background: #991f00;
+	border-radius: 5px;
+	margin: auto 10px;
+}
+
 div.btn.btn-primary.pull-right.readmore {
+	background-color: none;
+	background: #004080;
+	border-radius: 5px;
+	margin: auto 20px;
+}
+
+input.btn.btn-primary.send.pull-right {
 	background-color: none;
 	background: #004080;
 	border-radius: 5px;
@@ -85,6 +125,11 @@ a.btn.readmore {
 }
 
 /*Footer menu*/
+
+h3.connect-title, ul.footer-social > li {
+	margin-top: 60px;
+}
+
 
 div.footer-menu {
 	background-color: none;

@@ -65,4 +65,52 @@ def create_page(request):
         'form': form,
     }
 
-    return render(request, 'create_post.html', context)
+    return render(request, 'page_form.html', context)
+
+
+
+def detai_page(request, slug=None):
+    instance_obj = get_object_or_404(Post, slug=slug)
+
+    context = {
+        'title': instance_obj.title,
+        'content': instance_obj.content,
+        'create_date': instance_obj.create_date,
+        'image': instance_obj.image,
+        'slug': instance_obj.slug,
+    }
+    return render(request, 'page_detail.html', context)
+
+
+def update_page(request, slug=None):
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
+    instance = get_object_or_404(Post, slug=slug)
+
+    form = PostForm(request.POST or None,
+                    request.FILES or None, instance=instance)
+    if form.is_valid():
+        obj_form = form.save(commit=False)
+        # print form.cleaned_date.get('title')
+        obj_form.save()
+        # message successfully updated
+        messages.success(request, 'Successfully Updated ')
+        return HttpResponseRedirect(obj_form.get_absolute_url())
+
+    context = {
+        'title': instance.title,
+        'instance': instance.content,
+        'form': form,
+        'image': instance.image,
+        'slug': instance.slug,
+    }
+    return render(request, 'update_page.html', context)
+
+
+def delete_page(request, slug=None):
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
+    instance = get_object_or_404(Post, slug=slug)
+    instance.delete()
+    messages.success(request, 'Successfully Deleted ')
+    return redirect('about:list_post')
