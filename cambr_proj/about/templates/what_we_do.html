@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="row">
+	<div class="col-sm-8 large-10 medium-10 small-12 columns">
+
+		{% for obj in content_data %}
+
+		<h3>{{obj.title}}</h3>
+		<img src="{% static '/images/{{obj.image}}' %}" class="img-responsive pull-right"/>
+		<p>
+			{{obj.content}}
+		</p>
+
+		{% endfor %}
+
+	</div>
+</div>
+
+{% endblock content %}

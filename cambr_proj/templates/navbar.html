@@ -48,10 +48,10 @@
 					<li class="main-menu-container">
 						<ul class="main-menu">
 							<li>
-								<a href="{% url 'about:about' %}">About</a>
+								<a href="#">About</a>
 								<ul class="sub-menu">
 									<li>
-										<a href="{% url 'about:what_we_do' %}">What we do!</a>
+										<a href="{% url 'about:whatwedo' %}">What we do!</a>
 									</li>
 									<li><a href="{% url 'about:volunter' %}">Volunterring</a></li>
 									<li><a href="{% url 'about:our_team' %}">Our Team</a></li>
@@ -59,7 +59,7 @@
 								</ul>
 							</li>
 							<li>
-								<a href="{% url 'post:list_post' %}">News</a>
+								<a href="{# url 'post:list_post' %}">News</a>
 							</li>
 							<li>
 								<a href="{% url 'contact:contact_us' %}">Contact</a>
@@ -72,9 +72,27 @@
 									</li>
 								</ul>
 							</li>
+							{% if user.is_staff and user.is_authenticated %}
 							<li>
-								<a href="{% url 'auth_login' %}" class="admin">Admin</a>
+								
+								<a href="{% url 'auth_logout' %}?next=/accounts/logout/" class="logout">
+								<i class="fa fa-user"> {{user}}:</i> 
+									Logout
+								</a>
 							</li>
+							{% else %}
+							<li>
+							    <a href="{% url 'auth_login' %}" class="login">
+							    Login
+							        <i class="fa fa-user"></i>
+							    </a>
+							</li>
+							<!-- <li>
+							    <a href="{% url 'registration_register' %}" class="register">Register
+							        <i class="fa fa-registered"></i>
+							    </a>
+							</li> -->
+							{% endif %}
 						</ul>
 
 

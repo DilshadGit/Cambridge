@@ -131,8 +131,11 @@ else:
 
 DEFAULT_FROM_EMAIL = "Coding For Entrepreneurs <info@home_start_cambridge.com>"
 
-EMAIL_HOST = 'localhost'
+EMAIL_HOST = 'smtp.homestartcambridgeshire.co.uk'
+EMAIL_HOST_USER = 'office@homestartcambridgeshire.co.uk'
+EMAIL_HOST_PASSWORD = 'somepasswords'
 EMAIL_PORT = 1025
+EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 

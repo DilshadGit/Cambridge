@@ -22,8 +22,17 @@ a.btn.donate-now {
 	font-size: 18px;
 }
 
-a.admin {
+a.login {
 	margin-left: 200px;
+}
+
+a.logout {
+	margin-left: 80px;
+	color: red;
+}
+
+a i.fa.fa-user {
+	coloer:green;
 }
 
 /*Carousel*/
@@ -63,6 +72,13 @@ button.btn.btn-info.pull-right.return {
 }
 
 div.btn.btn-primary.pull-right.readmore {
+	background-color: none;
+	background: #004080;
+	border-radius: 5px;
+	margin: auto 20px;
+}
+
+input.btn.btn-primary.send.pull-right {
 	background-color: none;
 	background: #004080;
 	border-radius: 5px;
