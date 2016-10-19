@@ -12,6 +12,7 @@ from django.utils.text import slugify
 
 def upload_image_location(instance, filename):
     return '%s/%s' % (instance.id, filename)
+    print filename, ' LOCATION'
 
 
 class WhatWeDo(models.Model):
