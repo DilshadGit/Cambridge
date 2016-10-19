@@ -94,22 +94,4 @@ def delete_post(request, slug=None):
     messages.success(request, 'Successfully Deleted ')
     return redirect('post:list_post')
 
-# def backend_posts(request):
-#     posts_list = Post.objects.all().order_by('-create_date')
-#     paginator = Paginator(posts_list, 7)  # Show 25 posts per page
-#     page = request.GET.get('page')
-#     try:
-#         posts = paginator.page(page)
-#     except PageNotAnInteger:
-#         # If page is not an integer, deliver first page.
-#         posts = paginator.page(1)
-#     except EmptyPage:
-#         # If page is out of range (e.g. 9999), deliver last page of results.
-#         posts = paginator.page(paginator.num_pages)
-#     context = {
-#         'query_set': posts,
-#         # 'title': 'title',
-#         # 'content': 'content',
-#         # 'create_date': 'Public Date',
-#     }
-#     return render(request, 'backend_post_list.html', context)
+

@@ -17,13 +17,22 @@
 			{% if image %}
 				<img src="{{image.url}}" class="img-responsive">
 			{% endif %}
-			<p>{{post.content|linebreaks|truncatechars:300}}</p>
+			<p class="content">{{post.content|linebreaks|truncatechars:400}}</p>
 			<a href="{% url 'post:detail' slug=post.slug %}">
 				<div class="btn btn-primary pull-right readmore">Read More </div>
 			</a>
 			<br/><hr/>
 
 		{% endfor %}
+
+	</div>
+
+	<div>
+		<div class="container">
+			{% if user.is_staff or user.is_authenticated %}
+				<a href="{% url 'post:create_post' %}"><button class="btn btn-success create pull-right">Add New Page</button></a>
+			{% endif %}
+		</div>
 
 	</div>
 	
