@@ -110,7 +110,7 @@
     - name: Setup Postgres User can Access DB
       become_user: postgres
       postgresql_user: db='{{dbname}}' name='{{dbuser}}' password='{{dbpassword}}' priv=ALL
-      #postgresql_user: name={{dbuser}} role_attr_flags=NOSUPERUSER,NOCREATEDB
+      postgresql_user: name='{{dbuser}}' role_attr_flags=NOSUPERUSER
 
 
     # Setup django and gunicorn wsgi server this has to install virtual env, then as the CMS user it then uses the PIP
