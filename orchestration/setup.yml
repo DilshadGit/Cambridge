@@ -1,0 +1,87 @@
+---
+- hosts: chh-dev
+  user: root
+
+  vars_files:
+  - vars/vagrant_variables.yml
+
+  handlers:
+  - name: Restart ssh
+    service: name=ssh state=restarted
+
+
+  tasks:
+  # Setup to users on the chh-test server
+  - name: Setup | create user chh_admin and chh_cms
+    command: useradd -m {{ item }} creates=/home/{{ item }}
+    become: true
+    become_method: sudo
+    with_items:
+      - '{{adminuser}}'
+      - '{{cmsuser}}'
+
+  # Setup passwords for both user 'chh_admin' and 'chh_cms' on our chh-test server
+  - name: Setup | set passwords for chh_admin and chh_user
+    shell: usermod -p $(echo '{{ item.createpassword }}' | openssl passwd -1 -stdin) {{ item.createuser }}
+    become: true
+    become_method: sudo
+    with_items:
+      - { createpassword: '{{adminpassword}}', createuser: '{{adminuser}}' }
+      - { createpassword: '{{cmspassword}}', createuser: '{{cmsuser}}' }
+
+  # Add our admin user to the 'sudo' group so that he may have sudo privillages
+  - name: add our admin to the 'sudo' group
+    user: name={{ adminuser }} comment="Deploy User" groups="sudo,admin,{{ adminuser }}"
+    become: true
+
+  # Setup an public key for this remote machine by copying the public key of this machine to the remote machine.
+  # We need to have our id_rsa.pub file within the vars directory of this setup.yml file.
+  - name: Setup | authorized key upload
+    authorized_key: user={{ item }}
+      key="{{ lookup('file', 'vars/id_rsa.pub') }}"
+      path='/home/{{ item }}/.ssh/authorized_keys'
+      manage_dir=no
+    become: true
+    with_items:
+      - '{{adminuser}}'
+      - '{{cmsuser}}'
+
+  # Add our admin user to the 'sudo' users file and allow them to not require passwords for sudo access.
+  - name: Sudoers | update sudoers file and validate
+    lineinfile: "dest=/etc/sudoers
+      insertafter=EOF
+      line='{{ adminuser }} ALL=(ALL) NOPASSWD: ALL'
+      regexp='{{ adminuser }} ALL=(ALL) NOPASSWD: ALL'
+      state=present"
+    become: true
+
+  # Since this could be on a fresh Digital Ocean Machine we should ensure we setup a proper bash shell! And not that crap
+  # shell you normally get with no arrow up or tab complet commands. So lets do that for both users.
+  - name: Setup a bash shell for both users
+    shell: sudo usermod -s /bin/bash {{ item }}
+    become: true
+    become_method: sudo
+    with_items:
+      - '{{adminuser}}'
+      - '{{cmsuser}}'
+
+  # We need to stop a user loging in with root access via SSH. Someone could brute force attack our server on our root
+  # accont
+  #- name: Disallow root SSH access
+  #  lineinfile: dest=/etc/ssh/sshd_config
+  #            regexp="^PermitRootLogin"
+  #            line="PermitRootLogin no"
+  #            state=present
+  #  notify: Restart ssh
+
+
+  # if we have a variable setup in our vars directory to change our default SSH port it will change it otherwise it will
+  # leave the SSH port at 22
+  - name: Change ssh port if we have configured it in our vars directory.
+    lineinfile: dest=/etc/ssh/sshd_config
+      regexp="^Port\s"
+      line="Port {{ ubuntu_common_ssh_port }}"
+      state=present
+    notify: Restart ssh
+
+

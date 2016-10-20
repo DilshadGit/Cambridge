@@ -1,0 +1,17 @@
+
+server {
+    listen 8001;
+    server_name 104.236.14.123;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static-cdn/ {
+        root /home/chh_cms/HomeStartCambridge/;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/chh_cms/HomeStartCambridge/cambr_proj/chhproject.sock;
+    }
+
+}
+

@@ -1,0 +1,120 @@
+# ************************************************************************
+# ************** Setup all host and IP names for servers *****************
+# ************************************************************************
+
+
+# Example server
+#[example]
+#188.166.145.32
+
+# Example server 2
+#[example2]
+#127.0.0.1
+
+# Application servers
+[app]
+192.168.60.4
+192.168.60.5
+
+# Database server
+[db]
+192.168.60.6
+
+
+# ************************************************************************
+# **************     Setup all Free Flow Wine VM's       *****************
+
+# Free Flow Wines Development Server VM
+[ffw-dev-vm]
+192.168.60.10
+
+# Free Flow Wines Production Server VM
+[ffw-prod-vm]
+192.168.60.20
+
+# Free Flow Wines VM 1
+[ffw-vm1]
+192.168.60.110
+
+# Free Flow Wines VM 2
+[ffw-vm2]
+192.168.60.210
+
+
+# ************************************************************************
+# ************** Setup all Free Flow Wine Digital Oceans *****************
+
+# Free Flow Wines Digital Ocean Production Server
+# This machine is setup from N.Herriot account and running Ubuntu 14.5 LTR 27th Sep 2016
+[ffw-prod]
+138.68.131.184
+
+# Free Flow Wines Digital Ocean Test Server
+# This machine is setup from Dilshad Abdulla's account and running Ubuntu 14.3 LTR
+[ffw-test]
+178.62.29.243
+
+
+# ************************************************************************
+# *********** Setup all Cambridge Home Start Digital Oceans **************
+
+# Cambridge Home Help Digital Ocean Test Server
+# This machine is setup from Nicholas Herriot's account and running Ubuntu 14.5 LTR
+[chh-dev]
+104.236.14.123
+
+
+
+
+# ************************************************************************
+# ****************** Setup all groups for each server ********************
+# ************************************************************************
+
+
+#Group 'ffw-all' with all free flow wine servers
+[ffw-all:children]
+ffw-dev-vm
+ffw-prod-vm
+ffw-prod
+ffw-test
+ffw-vm1
+ffw-vm2
+
+#Group 'ffw-all-vm' with all free flow wine servers that are virtual machines
+[ffw-all-vm:children]
+ffw-dev-vm
+ffw-prod-vm
+ffw-vm1
+ffw-vm2
+
+#Group 'ffw-all-vm' with all free flow wine servers that are droplets
+[ffw-all-drop:children]
+ffw-prod
+ffw-test
+
+
+# ************************************************************************
+# **************** Setup all variables for each server *******************
+# ************************************************************************
+
+# Variables that will be used on ffw-prod
+[ffw-prod:vars]
+#ansible_ssh_pass=Hb-DrhJGJ5u9c-ZVUO5P_1TyOybeqomc
+
+# Variables that will be used on ffw-test
+[ffw-test:vars]
+ansible_ssh_user=root
+
+
+# Variables that will be used on chh-dev
+[chh-dev:vars]
+ansible_ssh_user=root
+
+
+# Variables that will be applied to all free flow wines VM servers
+[ffw-all-vm:vars]
+ansible_ssh_user=vagrant
+ansible_ssh_pass=vagrant
+ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+
+
