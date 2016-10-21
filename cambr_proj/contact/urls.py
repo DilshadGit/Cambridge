@@ -7,4 +7,5 @@ from contact import views as contact_views
 
 urlpatterns = [
     url(r'^$', contact_views.contact, name='contact_us'),
+    url(r'thanks^$', contact_views.contact_thanks, name='contact_thanks_email')
 ]
