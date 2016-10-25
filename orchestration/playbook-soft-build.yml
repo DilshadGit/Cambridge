@@ -1,0 +1,71 @@
+# This file will pull down from the latest software in 'master', collect static files, do django migration. No restart of
+# services will be restarted. It requires a user who has CMS privillages and it would be helpfull if there is already a public key
+# setup for the ssh connection between your host computer and the destination
+
+---
+- hosts: chh-dev
+  user: '{{adminuser}}'
+  become: true                                                # This will tell ansible to become 'sudo' to issue commands on the machine
+
+  vars_files:
+    - vars/vagrant_variables.yml
+
+  vars:
+    ansible_ssh_user: '{{adminuser}}'                         # We need to override this to use the admin user to SSH to the machine as
+                                                              # the root account will be locked via SSH by this point
+    environment_path: /home/chh_cms/home_start_venv           # this is the virtual environment project folder
+    environment_name : env_projectname
+    project_root: ~/HomeStartCambridge                        # this is the root folder where the source code is
+    project_name: cambr_proj
+    project_repo: https://github.com/DilshadGit/Cambridge.git #https://github.com/nherriot/FreeFlowWines.git
+    django_settings: config.settings                          # this is where we get our settings.py from
+    git_branch: production
+
+
+  pre_tasks:
+
+    ##################################################
+    # The simplest task - check we can ping our server
+    - name: Check that the server's alive!
+      action: ping
+    # Update the machines before installing any software
+    - name: Update machines
+      apt: update_cache=yes cache_valid_time=3600
+
+  handlers:
+
+
+  tasks:
+
+    # We can install all packages we need from git by taking our build straight from the 'production' branch
+    - name: Clone project from git branch 'production'
+      become_user: '{{cmsuser}}'
+      git:
+        repo={{project_repo}}
+        dest={{project_root}}
+        remote=origin version={{git_branch}}
+
+    # Give read and write permissions to the virtual environment path
+    #- name: change permissions
+    #  shell: chmod 777 {{environment_path}}
+
+    # This installs all our packages from the requirements.txt file in our repository
+    - name: Install any new dependencies into virtualenv (i.e. install requirements.txt)
+      become_user: '{{cmsuser}}'
+      action: pip requirements={{project_root}}/{{project_name}}/requirements.txt virtualenv={{environment_path}} state=present
+
+    # Run the makemigrations on the insalled django app in 'django_dir'. This only migrates the initial django DB
+    - name: Django Migrate DB Tables - (this will do any changes that have happened since last update).
+      become_user: '{{cmsuser}}'
+      django_manage: command=migrate
+        virtualenv={{environment_path}}
+        app_path={{project_root}}/{{project_name}}
+
+
+    # Collect static files from the installed directories to where ther are served from. This is controlled in the
+    # settings.py file
+    - name: Django Collectstatic Files
+      become_user: '{{cmsuser}}'
+      django_manage: command=collectstatic
+        virtualenv={{environment_path}}
+        app_path={{project_root}}/{{project_name}}

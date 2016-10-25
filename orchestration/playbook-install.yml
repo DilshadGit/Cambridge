@@ -125,8 +125,8 @@
       pip: name=django version=1.9.2 virtualenv={{environment_path}} virtualenv_python=python2.7
 
 
-    # likewise we can install all packages we need from git by taking our build straight from the master branch
-    - name: Clone project from git
+    # likewise we can install all packages we need from git by taking our build straight from the production branch
+    - name: Clone project from git branch 'production'
       become_user: '{{cmsuser}}'
       git:
         repo={{project_repo}}
