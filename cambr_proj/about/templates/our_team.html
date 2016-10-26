@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
+{% block nav-team %}<span class="nav-active">{{title}}</span>{% endblock %}
+
 {% block content %}
 <script src="{% static 'js/main.js' %}"></script>
 <div class="container">

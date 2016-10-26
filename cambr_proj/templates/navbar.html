@@ -1,6 +1,7 @@
 {% load staticfiles %}
 {% load i18n %}
 
+{# load tag #}
 
 <nav class="topnavbar">
 
@@ -10,7 +11,7 @@
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#HSCNavBar" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -22,28 +23,38 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse" id="HSCNavBar">
+      
       <ul class="nav navbar-nav">
-        <li class="active"><a href="{% url 'about:index' %}">Home <span class="sr-only">(current)</span></a></li>
+        <li class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+            <a href="{% url 'about:index' %}">
+              Home <span class="sr-only">(current)</span>
+            </a>
+        </li>
         
-        <li class="dropdown">
-          <a href="{% url 'about:pages' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+        <li class="dropdown{% if request.resolver_match.url_name == 'pages' %}active{% endif %}" >
+          <a href="{% url 'about:pages' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span>
+          </a>
+        
           <ul class="dropdown-menu">
-            
             {% for obj in query_page %}
-              <li>
-                <a href="{% url 'about:page_detail' slug=obj.slug  %}">{{obj.title}}
+              <li class="{% if request.resolver_match.url_name == 'page_detail' %}active{% endif %}">
+                <a href="{% url 'about:page_detail' slug=obj.slug  %}">
+                  {{obj.title}}
                 </a>
               </li>
             {% endfor %}
-           <!--  <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li> -->
           </ul>
         </li>
-        <li><a href="{% url 'post:list_post' %}">News</a></li>
-        <li><a href="{% url 'about:our_team' %}">Our Team</a></li>
-        <li><a href="{% url 'contact:contact_us' %}">Contact</a></li>
+        <li class="{% if request.resolver_match.url_name == 'list_post' %}active{% endif %}">
+          <a href="{% url 'post:list_post' %}">News</a>
+        </li>
+        <li class="{% if request.resolver_match.url_name == 'our_team' %}active{% endif %}">
+            <a href="{% url 'about:our_team' %}">Our Team</a>
+          </li>
+        <li class="{% if request.resolver_match.url_name == 'contact_us' %}active{% endif %}">
+          <a href="{% url 'contact:contact_us' %}">Contact</a>
+        </li>
         
       </ul>
 
@@ -54,17 +65,24 @@
             <a href="{% url 'about:pages' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             {{user|capfirst}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="{% url 'auth_logout' %}">{% trans 'Logout' %}</a></li>
-              <li><a href="{% url 'auth_password_change' %}">{% trans "Change password" %}</a></li>
+              <li class="{% if request.resolver_match.url_name == 'auth_logout' %}active{% endif %}">
+                <a href="{% url 'auth_logout' %}">{% trans 'Logout' %}</a>
+              </li>
+              <li class="{% if request.resolver_match.url_name == 'auth_password_change' %}active{% endif %}">
+                <a href="{% url 'auth_password_change' %}">{% trans "Change password" %}</a>
+              </li>
             </ul>
           </li>
           
         {% else %}
-          <li><a href="{% url 'auth_login' %}">{% trans 'Login' %}</a></li>
-          <li><a href="{% url 'registration_register' %}">{% trans 'Register' %}</a></li>
+          <li class="{% if request.resolver_match.url_name == 'auth_login' %}active{% endif %}">
+          <a href="{% url 'auth_login' %}">{% trans 'Login' %}</a></li>
+          <li>
+          <a href="{% url 'registration_register' %}">{% trans 'Register' %}</a></li>
         {% endif %}
-        <li>
-	        <a href="http://uk.virginmoneygiving.com/charity-web/charity/finalCharityHomepage.action?charityId=1001602" class="btn donate-now">DONATE NOW!</a>
+        <li class="{% if request.resolver_match.url_name == 'http://uk.virginmoneygiving.com/charity-web/charity/finalCharityHomepage.action?charityId=1001602' %}active{% endif %}">
+
+	        <a href="http://uk.virginmoneygiving.com/charity-web/charity/finalCharityHomepage.action?charityId=1001602" class="btn donate-now" target="_blank">DONATE NOW!</a>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

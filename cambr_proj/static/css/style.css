@@ -10,6 +10,22 @@ nav.navbar.navbar-inverse {
 	border-color: #fff;
 }
 
+nav.navbar.navbar-inverse  {
+	border-top: 1px solid #991f00;
+}
+.navbar-inverse .navbar-nav > li > a {
+	color: #000;
+	text-transform: uppercase;
+}
+
+.navbar-brand, .navbar-nav>li>a:hover {
+	
+}
+
+ul.nav.navbar-nav li a:hover {
+	text-shadow: 1px 1px #b30000;
+}
+
 .navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:hover,
 .navbar-inverse .navbar-nav > .active > a:focus {
@@ -64,7 +80,7 @@ div.col-md-12 > h3,
 div.col-md-8 > h3,
 div.col-md-8 > h4 {
 	text-align: justify;
-	line-height: 30px;
+	line-height: 26px;
 	font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -73,10 +89,16 @@ div.col-md-5 > p.content,
 div.col-md-12 > p,
 div.col-md-8 > p {
 	text-align: justify;
-	line-height: 30px;
+	line-height: 26px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 16px;
 }
+
+
+div.panel.panel-primary > div.panel-body {
+	border: none;
+}
+
 
 div.col-lg-3.col-sm-4.col-6 > button.btn.btn-primary {
 	margin-bottom: 10px;
