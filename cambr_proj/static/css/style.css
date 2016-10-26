@@ -175,3 +175,8 @@ div.col-md-6 > p {
 div.controls ul li {
 	display: none;
 }
+
+
+/* Used to pad Noisy Atom logo up on the footers */
+
+div.col-md-3 > a > img {margin-top: -5px}
