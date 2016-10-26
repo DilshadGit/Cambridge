@@ -1,9 +1,11 @@
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils import timezone
 
 # Create your views here.
-from .models import WhatWeDo, Volunterring, OurTeam, OurBoard
+from .models import Page
+from .forms import PageForm
 
 
 # def about_page(request):
@@ -12,47 +14,40 @@ from .models import WhatWeDo, Volunterring, OurTeam, OurBoard
 
 
 def index_page(request):
-    context = ''
+    title_page = Page.objects.all().order_by('-title')
+    context = {
+        'query_page': title_page
+    }
+
     return render(request, '../templates/index.html', context)
 
-
-def what_wedo(request):
-    queryset = WhatWeDo.objects.all()
+def list_page(request):
+    query_page = Page.objects.filter(
+            create_date=timezone.now()).order_by('-title')
+    # title_page = Page.objects.all().order_by('-title')
     context = {
-        'content_data': queryset,
+        'query_page': title_page.title,
     }
-    return render(request, 'what_we_do.html', context)
 
-
-def volunter_page(request):
-    queryset = Volunterring.objects.all()
-    context = {
-        'content_data': queryset,  
-    }
-    return render(request, 'volunterring.html', context)
+    return render(request, 'pages.html', context)
 
 
 def team_page(request):
-    queryset = OurTeam.objects.all()
+    title_page = Page.objects.all().order_by('-title')
     context = {
-        'content_data': queryset,  
+        'query_page': title_page
     }
-    return render(request, 'teams.html', context)
+
+    return render(request, 'our_team.html', context)
 
 
-def board_page(request):
-    queryset = OurBoard.objects.all()
-    context = {
-        'content_data': queryset,  
-    }
-    return render(request, 'board.html', context)
 
 
 def create_page(request):
     # This will stop user to acces to create page without login
     if not request.user.is_staff or not request.user.is_superuser:
         raise Http404
-    form = PostForm(request.POST or None, request.FILES or None)
+    form = PageForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         obj_form = form.save(commit=False)
         # print form.cleaned_date.get('title')
@@ -61,8 +56,61 @@ def create_page(request):
         messages.success(request, 'Successfully created ')
         return HttpResponseRedirect(obj_form.get_absolute_url())
 
+    title_page = Page.objects.all().order_by('-title')
     context = {
         'form': form,
+        'query_page': title_page
     }
 
-    return render(request, 'create_post.html', context)
+    return render(request, 'page_form.html', context)
+
+
+def detail_page(request, slug=None):
+
+    instance_obj = get_object_or_404(Page, slug=slug)
+
+    title_page = Page.objects.all().order_by('-title')
+    context = {
+        'title': instance_obj.title,
+        'content': instance_obj.content,
+        'create_date': instance_obj.create_date,
+        'image': instance_obj.image,
+        'slug': instance_obj.slug,
+        'query_page': title_page
+    }
+     
+    return render(request, 'page_detail.html', context)
+
+
+def update_page(request, slug=None):
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
+    instance = get_object_or_404(Page, slug=slug)
+
+    form = PageForm(request.POST or None,
+                    request.FILES or None, instance=instance)
+    if form.is_valid():
+        obj_form = form.save(commit=False)
+        # print form.cleaned_date.get('title')
+        obj_form.save()
+        # message successfully updated
+        messages.success(request, 'Successfully Updated ')
+        return HttpResponseRedirect(obj_form.get_absolute_url())
+
+    context = {
+        'title': instance.title,
+        'instance': instance.content,
+        'form': form,
+        'image': instance.image,
+        'slug': instance.slug,
+    }
+    return render(request, 'page_update.html', context)
+
+
+def delete_page(request, slug=None):
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
+    instance = get_object_or_404(Page, slug=slug)
+    instance.delete()
+    messages.success(request, 'Successfully Deleted ')
+    return redirect('about:index')

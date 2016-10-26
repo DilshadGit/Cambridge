@@ -1,20 +1,13 @@
 {% load staticfiles %}
 
 {% include 'header.html' %}
+
 {% include 'navbar.html' %}
 
-	<!-- page_centre_entry.html start -->
-<div id="home-container">
 
-<section class="section">
-	<div class="home">
-		<div class="row">
-			{% block content %}
+{% block content %}
 
-			{% endblock %}
-		</div>
-	</div>
-</section>
-<!-- page_centre_entry.html end -->
+{% endblock %}
+
 
 {% include 'footer.html' %}

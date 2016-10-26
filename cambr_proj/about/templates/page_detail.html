@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			{% if messages %}
+			<ul class="messages">
+			    {% for message in messages %}
+			    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+			    {% endfor %}
+			</ul>
+			{% endif %}
+
+			<h3>{{title}} <small class="pull-right"><i>{{create_date.timesince}}</i></small></h3>
+			{% if image %}
+				<img src="{{image.url}}" class="thumbnail img-responsive pull-right">
+			{% endif %}
+			<p class="content">{{content|linebreaks}}</p>
+			<!-- <p>Auther: {{user}}</p> -->
+			
+			<hr>
+			<br/>
+			
+			<div class="container">
+			<a href="{% url 'about:index' %}">
+				<button class="btn btn-info pull-right return">Return</button>
+			</a>
+			{% if user.is_staff or user.is_authenticated %}
+				<a href="{% url 'about:create_page' %}"><button class="btn btn-success create">Add New Page</button></a>
+				<a href="{% url 'about:page_update' slug=slug %}"><button class="btn btn-primary">Update</button></a>
+				<a href="{% url 'about:page_delete' slug=slug %}"><button class="btn btn-danger">Delete</button></a>
+			{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

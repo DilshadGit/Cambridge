@@ -6,13 +6,18 @@
 {% block title %}{% trans "Register for an account" %}{% endblock %}
 
 {% block content %}
-<div class="large-6 medium-6 small-12 columns">
-<h3>Registeration form</h3>
-<form method="post" action="">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <input type="submit" class="btn readmore" value="{% trans 'Submit' %}" />
-</form>
+<div class="container">
+    <dir class="row">
+		<div class="col-md-8">
+
+			<h3>Registeration form</h3>
+			<form method="post" action="">
+			    {% csrf_token %}
+			    {{ form|crispy }}
+			    <input type="submit" class="btn readmore" value="{% trans 'Submit' %}" />
+			</form>
+		</div>
+	</dir>
 </div>
 {% endblock %}
 
