@@ -1,0 +1,53 @@
+# This guide is optimized for Vagrant 1.7 and above.
+# Although versions 1.6.x should behave very similarly, it is recommended
+# to upgrade instead of disabling the requirement below.
+Vagrant.require_version ">= 1.7.0"
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # Disable the new default behavior introduced in Vagrant 1.7, to
+  # ensure that all Vagrant machines will use the same SSH key pair.
+  # See https://github.com/mitchellh/vagrant/issues/5005
+  #config.ssh.insert_key = false
+
+  #config.vm.box = "ubuntu/trusty64"
+  #config.vm.network "forwarded_port", guest: 80, host: 8080
+  # Synching an alfacms folder within the host relative to the project route
+  # and the default user on the guest machine
+  config.vm.synced_folder "alfacms/", "/home/vagrant/alfacms"
+
+  # VM for ElasticSearch Engine 1.7.5 and Kibana 4.1.
+  config.vm.define "alfaES1-7" do |app|
+    app.vm.hostname = "alfaElasticSearch-1-7"                 # Specify a host name for the VM so that Ansible can target
+	app.vm.box = "ubuntu/trusty64"                            # This uses Ubuntu Release: 14.04 Codename: trusty
+	app.vm.network :private_network, ip: "192.168.60.10"      # IP address to talk to our local machines during test
+  end
+
+  # VM for ElasticSearch Engine 2.5 and Kibana 4.5. This will be our primary shard
+  config.vm.define "alfaES-Prim-2-5" do |app|
+    app.vm.hostname = "alfaElasticSearch-Prim-2-5"            # Specify a host name for the VM so that Ansible can target
+	app.vm.box = "ubuntu/trusty64"                            # This uses Ubuntu Release: 14.04 Codename: trusty
+	app.vm.network :private_network, ip: "192.168.60.20"      # IP address to talk to our local machines during test
+  end
+
+  # VM for ElasticSearch Engine 2.5 and Kibana 4.5. This will be our 1st replication node
+  config.vm.define "alfaES-Repl1-2-5" do |app|
+    app.vm.hostname = "alfaElasticSearch-Replication1-2-5"    # Specify a host name for the VM so that Ansible can target
+	app.vm.box = "ubuntu/trusty64"                            # This uses Ubuntu Release: 14.04 Codename: trusty
+	app.vm.network :private_network, ip: "192.168.60.30"      # IP address to talk to our local machines during test
+  end
+
+  # VM for ElasticSearch Engine 2.5 and Kibana 4.5. This will be our 2nd replication node
+  config.vm.define "alfaES-Repl2-2-5" do |app|
+    app.vm.hostname = "alfaElasticSearch-Replication2-2-5"    # Specify a host name for the VM so that Ansible can target
+	app.vm.box = "ubuntu/trusty64"                            # This uses Ubuntu Release: 14.04 Codename: trusty
+	app.vm.network :private_network, ip: "192.168.60.40"      # IP address to talk to our local machines during test
+  end
+
+  config.vm.provision "ansible" do |ansible|
+    ansible.verbose = "v"
+    ansible.playbook = "playbook.yml"
+  end
+end
+

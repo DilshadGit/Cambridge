@@ -1,0 +1,103 @@
+---
+- hosts: chh-dev
+  user: '{{adminuser}}'
+  become: true                                                # This will tell ansible to become 'sudo' to issue commands on the machine
+
+  vars_files:
+    - vars/vagrant_variables.yml
+
+  vars:
+    ansible_ssh_user: '{{adminuser}}'                         # We need to override this to use the admin user to SSH to the machine as
+                                                              # the root account will be locked via SSH by this point
+    dbname: chh_db_03102016                                   # this is used to setup the database name in postgres
+    dbuser: chh_db_user                                       # this is used to setup the database user in postres
+    dbpassword: IPq52l7a                                      # this is used to setup the database password TODO put this in a keepass file
+    environment_path: /home/chh_cms/home_start_venv           # this is the virtual environment project folder
+    environment_name : home_start_venv
+    project_root: ~/HomeStartCambridge                        # this is the root folder where the source code is
+    project_root_name: HomeStartCambridge
+    project_name: cambr_proj
+    project_repo: https://github.com/DilshadGit/Cambridge.git #https://github.com/nherriot/FreeFlowWines.git
+    django_settings: config.settings                          # this is where we get our settings.py from
+
+
+  pre_tasks:
+
+    ##################################################
+    # The simplest task - check we can ping our server
+    - name: Check that the server's alive!
+      action: ping
+    # Update the machines before installing any software
+    - name: Update machines
+      apt: update_cache=yes cache_valid_time=3600
+
+
+  tasks:
+
+    # Stop Nginx process and remove from memory
+    - name: Stop Nginx to remove from memory
+      become_user: root
+      service: name=nginx state=stopped enabled=no
+      register: command_result
+      failed_when: "command_result|failed and 'service not found' not in command_result.msg"
+
+
+    # Stop the gunicorn wsgi server and remove from memory.
+    - name: Stop Gunicorn WSGI Server
+      become_user: root
+      service: name=gunicorn state=stopped enabled=no
+      register: command_result
+      failed_when: "command_result|failed and 'service not found' not in command_result.msg"
+
+
+
+
+    # Drop the postgres database before removing software components
+    - name: Drop the Postgres database
+      become_user: postgres
+      postgresql_db: name={{dbname}} state=absent
+
+
+    # Remove required software components from our build server
+    - name: Remove Sofware2 ( python-pip, python-dev, libpq-dev, postgresql, postgresql-contrib psycopg2 and nginx )
+      apt: name={{item}} state=absent
+      with_items:
+        - python-pip
+        - python-dev
+        - python-setuptools
+        - python-tk
+        - liblcms2-dev
+        - libfreetype6-dev
+        - libjpeg8-dev
+        - libpq-dev
+        - libtiff5-dev
+        - libwebp-dev
+        - postgresql
+        - postgresql-contrib
+        - nginx
+        - python-psycopg2
+        - git
+        - tcl8.6-dev
+        - tk8.6-dev
+        - zlib1g-dev
+
+    - name: Remove Symbolic Links to chhecommerce
+      become_user: root
+      file: path=/etc/nginx/sites-enabled/chhecommerce state=absent force=true
+
+    - name: Remove chhecommerce from Nginx Config Dir 'sites-available'
+      become_user: root
+      file: path=/etc/nginx/sites-available/chhecommerce state=absent
+
+    - name: Remove gunicorn config file gunicorn.conf from etc/init directory
+      become_user: root
+      file: path=/etc/init/gunicorn.conf state=absent
+
+    - name: Remove Directory HomeStartCambridge and home_start_venv
+      become_user: '{{ cmsuser }}'
+      file: path=~/{{ item }} state=absent
+      with_items:
+        - '{{environment_name}}'
+        - '{{project_root_name}}'
+
+
