@@ -176,7 +176,15 @@ div.controls ul li {
 	display: none;
 }
 
+/* Making our header tags the same style color as the old theme */
 
+h4 {
+    color: #A21A7E;
+}
+
+h3 {
+    color: #A21A7E;
+}
 /* Used to pad Noisy Atom logo up on the footers */
 
 div.col-md-3 > a > img {margin-top: -5px}
