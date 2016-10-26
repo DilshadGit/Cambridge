@@ -46,7 +46,7 @@ ul.nav.navbar-nav li a:hover {
 
 
 img.logo {
-	margin-top: -50px;
+	margin-top: -20px;
 }
 
 img.img-responsive.pull-right {
@@ -198,7 +198,15 @@ div.controls ul li {
 	display: none;
 }
 
+/* Making our header tags the same style color as the old theme */
 
+h4 {
+    color: #A21A7E;
+}
+
+h3 {
+    color: #A21A7E;
+}
 /* Used to pad Noisy Atom logo up on the footers */
 
 div.col-md-3 > a > img {margin-top: -5px}
