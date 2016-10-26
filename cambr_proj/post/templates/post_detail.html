@@ -4,9 +4,9 @@
 
 {% block content %}
 
-
+<div class="container">
 <div class="row">
-	<div class="col-sm-8">
+	<div class="col-md-12">
 			{% if messages %}
 			<ul class="messages">
 			    {% for message in messages %}
@@ -14,25 +14,27 @@
 			    {% endfor %}
 			</ul>
 			{% endif %}
+
 			<h3>{{title}} <small class="pull-right"><i>{{create_date}}</i></small></h3>
 			{% if image %}
-				<img src="{{image.url}}" class="img-responsive pull-right">
+				<img src="{{STATIC_URL}}{{image.url}}" class="img-responsive pull-right">
 			{% endif %}
 			<p class="content">{{content|linebreaks}}</p>
-			<p>Auther: {{user}}</p>
+
+			<!-- <p>Auther: {{user}}</p> -->
 			
+
+			<div class="container">
 			<a href="{% url 'post:list_post' %}">
 				<button class="btn btn-info pull-right return">Return</button>
 			</a><br/>
-
-			<div class="container">
 			{% if user.is_staff or user.is_authenticated %}
 				<a href="{% url 'post:create_post' %}"><button class="btn btn-success create">Add New Page</button></a>
-				<a href="{% url 'post:update_page' slug=slug %}"><button class="btn btn-update">Update</button></a>
+				<a href="{% url 'post:update_post' slug=slug %}"><button class="btn btn-update">Update</button></a>
 				<a href="{% url 'post:delete_post' slug=slug %}"><button class="btn btn-delete">Delete</button></a>
 			{% endif %}
 			</div>
-
+		</div>
 	</div>
 </div>
 {% endblock content %}

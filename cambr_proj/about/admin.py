@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import WhatWeDo, Volunterring, OurTeam, OurBoard
+from .models import Page
 
 
 # class AboutUsAdmin(admin.ModelAdmin):
@@ -11,23 +11,9 @@ from .models import WhatWeDo, Volunterring, OurTeam, OurBoard
 
 # admin.site.register(AboutUs, AboutUsAdmin)
 
-class WhatWeDoAdmin(admin.ModelAdmin):
+class PageAdmin(admin.ModelAdmin):
     class Meta:
-        models = WhatWeDo
+        models = Page
 
-class VolunterringAdmin(admin.ModelAdmin):
-    class Meta:
-        models = Volunterring
+admin.site.register(Page, PageAdmin)
 
-class OurTeamAdmin(admin.ModelAdmin):
-    class Meta:
-        models = OurTeam
-
-class OurBoardAdmin(admin.ModelAdmin):
-    class Meta:
-        models = OurBoard
-
-admin.site.register(WhatWeDo, WhatWeDoAdmin)
-admin.site.register(Volunterring, VolunterringAdmin)
-admin.site.register(OurTeam, OurTeamAdmin)
-admin.site.register(OurBoard, OurBoardAdmin)

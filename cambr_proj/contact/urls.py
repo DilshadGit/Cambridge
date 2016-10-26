@@ -6,7 +6,5 @@ from django.conf.urls.static import static
 from contact import views as contact_views
 
 urlpatterns = [
-    url(r'^thanks/(?P<name>[\w-]+)$', contact_views.contact_thanks, name='contact_thanks_email'),
-    url(r'^$', contact_views.contact, name='contact_us')
-
+    url(r'^$', contact_views.contact, name='contact_us'),
 ]

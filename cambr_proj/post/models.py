@@ -31,7 +31,7 @@ class Post(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('post:detail', kwargs={'slug': self.slug})
+        return reverse('post:detail_post', kwargs={'slug': self.slug})
 
 
     class Meta:

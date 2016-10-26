@@ -1,199 +1,70 @@
 {% load staticfiles %}
-
-<!-- Google Tag Manager -->
-<noscript>
-	<iframe src="//www.googletagmanager.com/ns.html?id=GTM-MFMT4N" height="0" width="0" style="display:none;visibility:hidden">
-	
-	</iframe>
-</noscript>
-<script>
-	(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
-		var f=d.getElementsByTagName(s)[0],
-		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-		'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-		})(window,document,'script','dataLayer','GTM-MFMT4N');
-</script>
-		<!-- End Google Tag Manager -->
-
-<!--[if lt IE 8]>
-	<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-<![endif]-->
-
-<div class="off-canvas-wrap" data-offcanvas>
-	<div class="inner-wrap">
-
-		<header>
-			<div class="header-top-container show-for-large-up">
-				<div class="header-top">
-					<!-- <ul class="top-menu right">
-						<li>
-						<a href="/about-us">About us</a>
-						</li>
-							<li>
-							<a href="/mission-and-vision">Mission & vision</a>
-						</li>
-					</ul> -->
-				</div>
-			</div>
-			
-			<div class="header-main">
-				<ul class="show-for-large-up">
-					<li class="logo-container">
-						<div class="logo-img-container">
-							<a href="/" class="logo">
-							<img src="{% static 'images/hsClogo.jpg' %}" alt="Home Start | Cambridgeshire" class="img-responsive"></a>
-						</div>
-					</li>
-
-					<li class="main-menu-container">
-						<ul class="main-menu">
-							<li>
-								<a href="#">About</a>
-								<ul class="sub-menu">
-									<li>
-										<a href="{% url 'about:whatwedo' %}">What we do!</a>
-									</li>
-									<li><a href="{% url 'about:volunter' %}">Volunterring</a></li>
-									<li><a href="{% url 'about:our_team' %}">Our Team</a></li>
-									<li><a href="{% url 'about:our_board' %}">Our Board</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="{% url 'post:list_post' %}">News</a>
-							</li>
-							<li>
-								<a href="{% url 'contact:contact_us' %}">Contact</a>
-							</li>
-							<li>
-								<a href="">Dontaes</a>
-								<ul class="sub-menu">
-									<li>
-										<a href="">Support Us</a>
-									</li>
-								</ul>
-							</li>
-							{% if user.is_staff and user.is_authenticated %}
-							<li>
-								
-								<a href="{% url 'auth_logout' %}?next=/accounts/logout/" class="logout">
-								<i class="fa fa-user"> {{user}}:</i> 
-									<span class="logout">Logout</span>
-								</a>
-							</li>
-							{% else %}
-							<li>
-							    <a href="{% url 'auth_login' %}" class="login">
-							    Login
-							        <i class="fa fa-user"></i>
-							    </a>
-							</li>
-							<!-- <li>
-							    <a href="{% url 'registration_register' %}" class="register">Register
-							        <i class="fa fa-registered"></i>
-							    </a>
-							</li> -->
-							{% endif %}
-						</ul>
+{% load i18n %}
 
 
-						<div class="hide-for-large-up">
-							<div class="left logo-img-container-mobile ">
-								<a href="/" class="logo">
-									<img src="{% static 'images/hsClogo.jpg' %}" alt="Home Start | Cambridgeshaire">
-								</a>
-							</div>
+<nav class="topnavbar">
 
-							<div class="right mobile-icons">
-								<ul>
-									<!-- <li>
-										<div class="icon-search right-off-canvas-toggle"><i class="fa fa-search"></i></div>
-									</li> -->
-									<li>
-										<div class="menu-trigger right-off-canvas-toggle">
-											<span></span>
-											<span></span>
-											<span></span>
-										</div>
-									</li>
-								</ul>
-							</div>
+</nav>
 
-							<div class="clearfix"></div>
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+        <img class="logo" src="{% static 'images/hsClogo.jpg' %}" alt="Home Start | Cambridgeshaire">
+      </a>
+    </div>
 
-							<div class="donate-now-container">
-								<a href="/" class="btn donate-now">
-									<img src="{% static 'images/hsClogo.jpg' %}" class="img-responsive">
-								</a>
-							</div>
-						</div>
-					</div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{% url 'about:index' %}">Home <span class="sr-only">(current)</span></a></li>
+        
+        <li class="dropdown">
+          <a href="{% url 'about:pages' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            {% for obj in query_page %}
+              <li>
+                <a href="{% url 'about:page_detail' slug=obj.slug  %}">{{obj.title}}
+                </a>
+              </li>
+            {% endfor %}
+           <!--  <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li> -->
+          </ul>
+        </li>
+        <li><a href="{% url 'post:list_post' %}">News</a></li>
+        <li><a href="{% url 'about:our_team' %}">Our Team</a></li>
+        <li><a href="{% url 'contact:contact_us' %}">Contact</a></li>
+        
+      </ul>
 
-					<div class="header-btns show-for-large-up">
-						<ul>
-							<!-- <li class="search-container">
-								<form id="search" name="search" action="/index.php" method="get">
-								<input type="hidden" name="action" value="sitesearch">
-
-								<div class="toggle-input">
-									<input class="search-q" placeholder="Search" name="q" type="text">
-									<div class="fa fa-times close-search"></div>
-								</div>
-								</form>
-								<div class="icon-search"></div>
-							</li> -->
-
-							<li class="donate-now-container">
-								<a href="http://uk.virginmoneygiving.com/charity-web/charity/finalCharityHomepage.action?charityId=1001602" class="btn donate-now">Donate Now!</a>
-							</li>
-						</ul>
-					</div>
-				</header>
-
-				<nav class="mobile-menu right-off-canvas-menu hide-for-large-up">
-					<div class="wrapper">
-						<!-- <form name="search" action="/index.php" method="get">
-							<input type="hidden" name="action" value="sitesearch">
-							<input class="search-q" placeholder="Search" name="q" type="text">
-							<button type="submit" class="submit-icon"><i class="fa fa-search"></i></button>
-						</form> -->
-						<ul>
-							<li>
-								<a href="/">
-									About pppp<i class="plus-icon"></i>
-								</a>
-								<ul class="sub-menu">
-									<li>
-										<a href="">What we do!>
-										</a>
-									</li>
-									<li>
-										<a href="" >Volunteering</a></li>
-									<li>
-										<a href="" >Our Team</a></li>
-									<li>
-										<a href="" >Our Board</a>
-									</li>
-								</ul>				
-							</li>
-							<li>
-								<a href="/">News</a>
-							</li>
-							<li>
-								<a href="">Contant</a>
-							</li>
-							<li>
-								<a href="/op-shops">Dontaes<i class="plus-icon"></i></a>
-								<ul class="sub-menu">
-									<li>
-										<a href="">Support Us
-										</a>
-									</li>
-								</ul>
-							</li>	
-						</ul>
-
-					</div>
-				</nav>
-
-
-<div class="clearfix"></div>
+      <ul class="nav navbar-nav navbar-right">
+        
+        {% if user.is_authenticated %}
+          <li class="dropdown">
+            <a href="{% url 'about:pages' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            {{user|capfirst}} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'auth_logout' %}">{% trans 'Logout' %}</a></li>
+              <li><a href="{% url 'auth_password_change' %}">{% trans "Change password" %}</a></li>
+            </ul>
+          </li>
+          
+        {% else %}
+          <li><a href="{% url 'auth_login' %}">{% trans 'Login' %}</a></li>
+          <li><a href="{% url 'registration_register' %}">{% trans 'Register' %}</a></li>
+        {% endif %}
+        <li><a href="">DONATE NOW</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

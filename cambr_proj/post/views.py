@@ -7,6 +7,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 # Create your views here.
 from .forms import PostForm
 from .models import Post
+from about.models import Page
 
 
 def list_post(request):
@@ -21,8 +22,12 @@ def list_post(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         posts = paginator.page(paginator.num_pages)
+
+    title_page = Page.objects.all().order_by('-title')
+
     context = {
         'query_set': posts,
+        'query_page': title_page
     }
 
     return render(request, 'posts.html', context)
@@ -41,8 +46,10 @@ def create_post(request):
         messages.success(request, 'Successfully created ')
         return HttpResponseRedirect(obj_form.get_absolute_url())
 
+    title_page = Page.objects.all().order_by('-title')
     context = {
         'form': form,
+        'query_page': title_page
     }
 
     return render(request, 'create_post.html', context)
@@ -50,6 +57,7 @@ def create_post(request):
 
 def post_details(request, slug=None):
     instance_obj = get_object_or_404(Post, slug=slug)
+    title_page = Page.objects.all().order_by('-title')
 
     context = {
         'title': instance_obj.title,
@@ -57,6 +65,7 @@ def post_details(request, slug=None):
         'create_date': instance_obj.create_date,
         'image': instance_obj.image,
         'slug': instance_obj.slug,
+        'query_page': title_page
     }
     return render(request, 'post_detail.html', context)
 
@@ -75,6 +84,8 @@ def update_post(request, slug=None):
         # message successfully updated
         messages.success(request, 'Successfully Updated ')
         return HttpResponseRedirect(obj_form.get_absolute_url())
+    # To render the page title on the navbar     
+    title_page = Page.objects.all().order_by('-title')
 
     context = {
         'title': instance.title,
@@ -82,6 +93,7 @@ def update_post(request, slug=None):
         'form': form,
         'image': instance.image,
         'slug': instance.slug,
+        'query_page': title_page
     }
     return render(request, 'post_update.html', context)
 

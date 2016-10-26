@@ -1,52 +1,37 @@
 {% load staticfiles %}
 
 <footer>
-    <div class="footer-top">
+
+  <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+            <ul class="social-network">
+              <li><a href="https://www.facebook.com/homestartcambridgeshire/?fref=ts" class="fa fa-facebook">Facebook</a></li>
+              <li><a href="https://www.linkedin.com/company/home-start-cambridgeshire?trk=company_logo" class="fa fa-linkedin">LinkedIn</a></li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+          <address>
+             <strong>© Home-Start Cambridgeshire.</strong><br>
+             Registered charity no. 1106007. Registered Charity no. 5139596, Registered office<br>
+             Home-Start Cambridgeshire,<br>
+             The Fields Children's Centre, Galfrid Road, Cambridge CB5 8ND<br/>
+             <abbr title="Phone">P:</abbr> (123) 456-7890
+           </address>
+        </div>
+        <div class="col-md-3">
+          <a href="" id="top">To Top</a>
+        </div>
+      </div>
+  
+  </div>
+
+
+<div class="buttom-footer">
+    <div class="container">
         <div class="row">
-            <div class="large-6 large-push-3 medium-6 medium-push-3 small-12 columns" id="follow-us">
-                <h3 class="connect-title">Follow us</h3>
-                    <ul class="footer-social">
-                      <li><a href="https://www.facebook.com/homestartcambridgeshire/?hc_ref=PAGES_TIMELINE&fref=nf" target='_blank'><span class="fa fa-facebook"></span></a></li>
-                      <li><a href="https://www.linkedin.com/m/company/10787097/" target='_blank'><span class="fa fa-linkedin"></span></a></li>
-                  </ul>
-            </div>
-
-            <div class="large-3 large-push-3 medium-3 medium-push-3 small-12 columns ">
-            <br>
-            <br>
-            
-                <a href="#" class="back-to-top">
-                    Back to top <i class="fa fa-chevron-up"></i>
-                </a>
-            </div>
-
-            <div class="large-3 large-pull-9 medium-3 medium-pull-9 small-12 columns">
-                <div class="logo">
-                    <a href="/" class="logo">
-                        <img src="{% static 'images/hsClogo.jpg' %}" alt="Home Start">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-<div class="footer-menu">
-    <div class="row">
-        <div class="large-12 medium-12 small-12 columns">
-            <strong><p>© Home-Start Cambridgeshire.</p></strong>
-            <p>Registered charity no. 1106007. Registered Charity no. 5139596, Registered office</p>
-            <address class="address">
-              Home-Start Cambridgeshire,<br/> The Fields Children's Centre, Galfrid Road, Cambridge CB5 8ND<br/>
-            </address>
-        </div>
-    </div>
-</div>
-
-<div class="footer-bottom">
-    <div class="row">
-        <div class="large-9 medium-8 small-12 columns">
-            <div class="footer-menu-bottom">
-                <ul>
+            <div class="col-md-10">
+                <ul class="copy-right">
                     <li>
                     Copyright &copy; 2016 Home-Start | Cambridgeshire.
                     </li>
@@ -58,30 +43,26 @@
                     - <a href="/terms-and-conditions">Terms & conditions</a>
                     </li>
                 </ul>
+            </div>
+            <div class="col-md-2">
+                Website by &nbsp;<a href="/" target="_blank" class="bwired">NoisyAtom <i class="fa fa-cog" aria-hidden="true"></i></a>
+            </div>
         </div>
     </div>
-    <div class="large-3 medium-4 small-12 columns">
-        <div class="branding">
-          Website by Noisy Atom&nbsp;
-            <a href="https://www.noisyatom.com" title="Website by Noisy Atom" target="_blank">
-	            <img src="{%  static 'images/na-icon.png' %}" alt="Noisy Atom Icon Image" width="30" height="30" />
-	        </a>
-        </div>
-    </div>
-  <!-- </div> -->
 </div>
 </footer>
+<!-- Bootstrap core JavaScript
+   ================================================== -->
+   <!-- Placed at the end of the document so the pages load faster -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+   <script>
+      window.jQuery || document.write('<script src="{% static "bootstrap/js/jquery/jquery.min.js" %}"><\/script>')
+    </script>
+   <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+   <script src="{% static 'bootstrap/js/docs.min.js' %}"></script>
+   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+   <script src="{% static 'bootstrap/js/ie10-viewport-bug-workaround.js' %}"></script>
 
-<a class="exit-off-canvas"></a>
-</div>
-</div>
-
-<script src="https://rgxkdk.corednacdn.com/js/vendor/jquery-ui.min.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUTuMllmk3LvJ8FCFtWZK7hkSeyeKL8BM&amp;sensor=false"></script>
-<script src="https://rgxkdk.corednacdn.com/js/libs.min.js"></script>
-<script src="https://rgxkdk.corednacdn.com/js/main.js?v1"></script>
-<!-- Widget Script --> <script src="//volunteerwidget.s3.amazonaws.com/js/volunteer-widget.js"></script> 
-<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"24fe916fc1","applicationID":"6083114,1855213,15675271","transactionName":"NlxRNktYXBEABRBRXw8WcBdKTV0PTgULSlUFV1JNW1VdAQpJFFlXBBZUB01mQgMGAw==","queueTime":0,"applicationTime":6,"atts":"GhtGQANCT05DB0YCSxxE","errorBeacon":"bam.nr-data.net","agent":""}</script>
 
 </body>
-</html><!-- coredna.heartbeat 1475336849.9159 -->
+</html>
