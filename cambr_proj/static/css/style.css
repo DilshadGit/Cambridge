@@ -52,11 +52,31 @@ img.img-responsive.pull-right {
 /* Index body area */
 div.index {
 	min-height: 300px;
-	
 	margin-bottom: 20px;
 }
 
+/* content pages */
 
+div.panel-body,
+div.col-md-7 > h3,
+div.col-md-5 > h3,
+div.col-md-12 > h3,
+div.col-md-8 > h3,
+div.col-md-8 > h4 {
+	text-align: justify;
+	line-height: 30px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+div.col-md-7 > p.content,
+div.col-md-5 > p.content,
+div.col-md-12 > p,
+div.col-md-8 > p {
+	text-align: justify;
+	line-height: 30px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+}
 
 div.col-lg-3.col-sm-4.col-6 > button.btn.btn-primary {
 	margin-bottom: 10px;
@@ -69,6 +89,9 @@ div.col-lg-3.col-sm-6.col-6 p {
 div.col-lg-3.col-sm-4.col-6 > p {
 	color: #000;
 	text-align: justify;
+	line-height: 30px;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 16px;
 }
 
 
@@ -90,7 +113,8 @@ footer .col-md-3 #top {
 	float: right;
 }
 
-ul.social-network li {
+ul.social-network li.fa.fa-facebook, 
+ul.social-network li.l {
 	display: inline-block;
 	color: #fff;
 }
@@ -99,6 +123,7 @@ ul li {
 	display: inline-block;
 	margin-top: 0px;
 	margin-right: 10px;
+	color: #fff;
 }
 
 ul.bs-docs-footer-links li a {
