@@ -18,12 +18,37 @@ nav.navbar.navbar-inverse  {
 	text-transform: uppercase;
 }
 
-.navbar-brand, .navbar-nav>li>a:hover {
-	
+.dropdown-menu > li,
+.dropdown-menu > li:focus,
+.dropdown-menu > li:hover {
+	width: 100%
+	background: #991f00;
+	color: #fff;
+	height: 30px;
+}
+
+.dropdown-menu > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #fff;
+    white-space: nowrap;
+    width: 100%
+}
+
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover,
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:focus {
+	background-color: none;
+	background: #991f00;
+	color: #fff;
+	width: 100%;
 }
 
 ul.nav.navbar-nav li a:hover {
-	text-shadow: 1px 1px #b30000;
+	text-shadow: 2px 2px #000;
 }
 
 .navbar-inverse .navbar-nav > .active > a,
@@ -56,6 +81,8 @@ img.img-responsive.pull-right {
 	margin-bottom: 20px;
 }
 
+
+/* Modals page in the team*/
 .modal-dialog {
 	width:600px;
 }
@@ -63,6 +90,13 @@ img.img-responsive.pull-right {
 .thumbnail {
 	margin-bottom:6px;
 }
+
+.carousel-control.left,.carousel-control.right{
+  background-image:none;
+  margin-top:10%;
+  width:5%;
+}
+     
 
 
 /* Index body area */

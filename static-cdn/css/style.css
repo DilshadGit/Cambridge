@@ -10,6 +10,47 @@ nav.navbar.navbar-inverse {
 	border-color: #fff;
 }
 
+nav.navbar.navbar-inverse  {
+	border-top: 1px solid #991f00;
+}
+.navbar-inverse .navbar-nav > li > a {
+	color: #000;
+	text-transform: uppercase;
+}
+
+.dropdown-menu > li,
+.dropdown-menu > li:focus,
+.dropdown-menu > li:hover {
+	width: 100%
+	background: #991f00;
+	color: #fff;
+	height: 30px;
+}
+
+.dropdown-menu > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #fff;
+    white-space: nowrap;
+    width: 100%
+}
+
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover,
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:focus {
+	background-color: none;
+	background: #991f00;
+	color: #fff;
+	width: 100%;
+}
+
+ul.nav.navbar-nav li a:hover {
+	text-shadow: 2px 2px #000;
+}
+
 .navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:hover,
 .navbar-inverse .navbar-nav > .active > a:focus {
@@ -30,7 +71,7 @@ nav.navbar.navbar-inverse {
 
 
 img.logo {
-	margin-top: -50px;
+	margin-top: -20px;
 }
 
 img.img-responsive.pull-right {
@@ -40,6 +81,8 @@ img.img-responsive.pull-right {
 	margin-bottom: 20px;
 }
 
+
+/* Modals page in the team*/
 .modal-dialog {
 	width:600px;
 }
@@ -47,6 +90,13 @@ img.img-responsive.pull-right {
 .thumbnail {
 	margin-bottom:6px;
 }
+
+.carousel-control.left,.carousel-control.right{
+  background-image:none;
+  margin-top:10%;
+  width:5%;
+}
+     
 
 
 /* Index body area */
@@ -64,7 +114,7 @@ div.col-md-12 > h3,
 div.col-md-8 > h3,
 div.col-md-8 > h4 {
 	text-align: justify;
-	line-height: 30px;
+	line-height: 26px;
 	font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -73,10 +123,16 @@ div.col-md-5 > p.content,
 div.col-md-12 > p,
 div.col-md-8 > p {
 	text-align: justify;
-	line-height: 30px;
+	line-height: 26px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 16px;
 }
+
+
+div.panel.panel-primary > div.panel-body {
+	border: none;
+}
+
 
 div.col-lg-3.col-sm-4.col-6 > button.btn.btn-primary {
 	margin-bottom: 10px;
@@ -175,3 +231,16 @@ div.col-md-6 > p {
 div.controls ul li {
 	display: none;
 }
+
+/* Making our header tags the same style color as the old theme */
+
+h4 {
+    color: #A21A7E;
+}
+
+h3 {
+    color: #A21A7E;
+}
+/* Used to pad Noisy Atom logo up on the footers */
+
+div.col-md-3 > a > img {margin-top: -5px}
