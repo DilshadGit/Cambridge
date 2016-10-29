@@ -12,40 +12,51 @@ nav.navbar.navbar-inverse {
 
 nav.navbar.navbar-inverse  {
 	border-top: 1px solid #991f00;
+	border: 0;
 }
+
 .navbar-inverse .navbar-nav > li > a {
 	color: #000;
 	text-transform: uppercase;
 }
 
-.dropdown-menu > li,
-.dropdown-menu > li:focus,
-.dropdown-menu > li:hover {
-	width: 100%
-	background: #991f00;
-	color: #fff;
-	height: 30px;
+ul.dropdown-menu  {
+	min-width: 172px;
 }
 
-.dropdown-menu > li > a {
+.dropdown-menu>li,
+.dropdown-menu>li:focus,
+.dropdown-menu>li:hover {
+	width: 172px;
+	color: #fff;
+	height: 40px;
+    padding-bottom: auto;
+}
+
+ul.dropdown-menu > li > a:hover {
     display: block;
-    padding: 3px 20px;
     clear: both;
     font-weight: normal;
     line-height: 1.42857143;
     color: #fff;
     white-space: nowrap;
-    width: 100%
+    width: 172px;
+    height: 40px;
+	padding-top: 10px;
+	background-image: -webkit-linear-gradient(top,#080808 0,red 100%);
+    background-image: -o-linear-gradient(top,#080808 0,#0f0f0f 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#080808),to(#0f0f0f));
+    background-image: linear-gradient(to bottom,#080808 0,red 100%);
 }
 
-.dropdown-menu>li>a:focus, .dropdown-menu>li>a
+/*.dropdown-menu>li>a:focus, .dropdown-menu>li>a
 .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover,
 .dropdown-menu>li>a:focus, .dropdown-menu>li>a:focus {
 	background-color: none;
 	background: #991f00;
 	color: #fff;
 	width: 100%;
-}
+}*/
 
 ul.nav.navbar-nav li a:hover {
 	text-shadow: 2px 2px #000;
@@ -59,7 +70,8 @@ ul.nav.navbar-nav li a:hover {
 }
 
 
-.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.open>a {
+.navbar-inverse .navbar-nav>.active>a, 
+.navbar-inverse .navbar-nav>.open>a {
     background-image: -webkit-linear-gradient(top,#080808 0,red 100%);
     background-image: -o-linear-gradient(top,#080808 0,#0f0f0f 100%);
     background-image: -webkit-gradient(linear,left top,left bottom,from(#080808),to(#0f0f0f));
