@@ -26,7 +26,7 @@ def list_page(request):
             create_date=timezone.now()).order_by('-title')
     # title_page = Page.objects.all().order_by('-title')
     context = {
-        'query_page': title_page.title,
+        'query_page': title_page,
     }
 
     return render(request, 'pages.html', context)
