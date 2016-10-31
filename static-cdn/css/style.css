@@ -49,14 +49,14 @@ ul.dropdown-menu > li > a:hover {
     background-image: linear-gradient(to bottom,#080808 0,red 100%);
 }
 
-/*.dropdown-menu>li>a:focus, .dropdown-menu>li>a
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a
 .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover,
 .dropdown-menu>li>a:focus, .dropdown-menu>li>a:focus {
 	background-color: none;
 	background: #991f00;
 	color: #fff;
 	width: 100%;
-}*/
+}
 
 ul.nav.navbar-nav li a:hover {
 	text-shadow: 2px 2px #000;
