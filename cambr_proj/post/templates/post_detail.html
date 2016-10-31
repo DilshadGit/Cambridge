@@ -17,7 +17,7 @@
 
 			<h3>{{title}} <small class="pull-right"><i>{{create_date}}</i></small></h3>
 			{% if image %}
-				<img src="{{STATIC_URL}}{{image.url}}" class="img-responsive pull-right">
+				<img src="{{STATIC_URL}}{{image.url}}" class="thumbnail img-responsive pull-right">
 			{% endif %}
 			<p class="content">{{content|linebreaks}}</p>
 
