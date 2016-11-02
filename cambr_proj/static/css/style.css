@@ -80,7 +80,7 @@ ul.dropdown-menu>li.active>a {
     background-image: linear-gradient(to bottom,#080808 0,red 100%);*/
 }
 
-.dropdown-menu>li>a:focus, .dropdown-menu>li>a
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a,
 .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover,
 .dropdown-menu>li>a:focus, .dropdown-menu>li>a:focus {
 	background-color: none;
@@ -231,7 +231,7 @@ img.thumbnail {
 
 footer {
 	height: 120px;
-	background-color: 
+	background-color: #991f00;
 }
 
 footer .col-md-3 #top {
