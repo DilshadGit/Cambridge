@@ -1,0 +1,69 @@
+# This file will dump the Live Postgres Database in a compressed format and copy into the orchestrations backup folder.
+# It will use the postgres super user account to access the database.
+
+---
+- hosts: chh-dev
+  user: '{{adminuser}}'
+  become: true                                                # This will tell ansible to become 'sudo' to issue commands on the machine
+
+  vars_files:
+    - vars/vagrant_variables.yml
+
+  vars:
+    remote_postgres_folder: /var/lib/postgresql/              # This is where our database directory exists for user 'postgres'
+    backup_file: chh_backup_database.sql                      # The name of the database file to dump from the server.
+    ansible_ssh_user: '{{adminuser}}'                         # We need to override this to use the admin user to SSH to the machine as
+                                                              # the root account will be locked via SSH by this point
+
+  pre_tasks:
+
+    ##################################################
+    # The simplest task - check we can ping our server
+    - name: Check that the server's alive!
+      action: ping
+    # Update the machines before installing any software
+
+  handlers:
+
+
+  tasks:
+
+    # We need to copy the database to our remote file system
+    - name: Copy Database To Remote Folder
+      become_user: postgres
+      copy: src={{item.file_name}} dest={{item.destination_directory}} #owner=root group=root mode="u=r,g=r,o=rw"
+      with_items:
+       - { file_name: 'backups/chh_backup_database.sql', destination_directory: '/var/lib/postgresql/' }
+       # - { file_name: 'vars/chhecommerce', destination_directory: '/etc/nginx/sites-available' }
+
+    # We need to drop the current database first.
+    - name: Drop the Postgres database
+      become_user: postgres
+      postgresql_db: name='{{dbname}}' state=absent
+
+
+    # This set up postgres for the first time
+    - name: Setup Postgres DB
+      become_user: postgres
+      postgresql_db: name='{{dbname}}'
+
+    - name: Setup Postgres User can Access DB
+      become_user: postgres
+      postgresql_user: db='{{dbname}}' name='{{dbuser}}' password='{{dbpassword}}' priv=ALL
+      postgresql_user: name='{{dbuser}}' role_attr_flags=NOSUPERUSER
+
+
+    # This loads the postgres database backup file onto the postgres server.
+    - name: Load The Postgres Database.
+      become_user: postgres
+      shell: psql {{dbname}} < {{remote_postgres_folder}}{{backup_file}}
+      #shell: pg_dump {{dbname}} > {{remote_postgres_folder}}{{backup_file}}
+      #shell: pg_dump chh_db_03102016 > /var/lib/postgresql/chh_backup_database.sql
+      #command: pg_dump -U chh_db_user -h localhost chh_db_03102016 > test2.sql
+
+    # Remove DB File From Server. This is to ensure we don't leave a DB backup on the server to improve our security
+    - name: Remove Dumped Database From Live Server
+      file: path={{remote_postgres_folder}}{{backup_file}} state=absent
+
+
+

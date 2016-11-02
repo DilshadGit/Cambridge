@@ -1,0 +1,53 @@
+# This file will dump the Live Postgres Database in a compressed format and copy into the orchestrations backup folder.
+# It will use the postgres super user account to access the database.
+
+---
+- hosts: chh-dev
+  user: '{{adminuser}}'
+  become: true                                                # This will tell ansible to become 'sudo' to issue commands on the machine
+
+  vars_files:
+    - vars/vagrant_variables.yml
+
+  vars:
+    remote_postgres_folder: /var/lib/postgresql/              # This is where our database directory exists for user 'postgres'
+    backup_file: chh_backup_database.sql                      # The name of the database file to dump from the server.
+    ansible_ssh_user: '{{adminuser}}'                         # We need to override this to use the admin user to SSH to the machine as
+                                                              # the root account will be locked via SSH by this point
+
+  pre_tasks:
+
+    ##################################################
+    # The simplest task - check we can ping our server
+    - name: Check that the server's alive!
+      action: ping
+    # Update the machines before installing any software
+
+  handlers:
+
+
+  tasks:
+
+    # This dumps the postgres database file into the local 'backup' directory on the host machine.
+    - name: Dump The Database.
+      become_user: postgres
+      shell: pg_dump {{dbname}} > {{remote_postgres_folder}}{{backup_file}}
+      #shell: pg_dump chh_db_03102016 > /var/lib/postgresql/chh_backup_database.sql
+      #command: pg_dump -U chh_db_user -h localhost chh_db_03102016 > test2.sql
+
+    - name: Fetch Backup Database From CHH Server to Local Machine
+      #become_user: postgres
+      fetch:  src={{remote_postgres_folder}}{{ item }} dest=backups/{{ item }} fail_on_missing=yes flat=yes
+      with_items:
+      - '{{backup_file}}'
+      #- "folder/two"
+
+    # Remove DB File From Server. This is to ensure we don't leave a DB backup on the server to improve our security
+    - name: Remove Dumped Database From Live Server
+      file: path={{remote_postgres_folder}}{{backup_file}} state=absent
+
+
+
+
+
+
