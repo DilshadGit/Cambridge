@@ -653,7 +653,7 @@ ALTER TABLE ONLY registration_registrationprofile ALTER COLUMN id SET DEFAULT ne
 -- Name: about_ourboard_id_seq; Type: SEQUENCE SET; Schema: public; Owner: chh_db_user
 --
 
-SELECT pg_catalog.setval('about_ourboard_id_seq', 1, false);
+SELECT pg_catalog.setval('about_ourboard_id_seq', 1, true);
 
 
 --
@@ -661,6 +661,7 @@ SELECT pg_catalog.setval('about_ourboard_id_seq', 1, false);
 --
 
 COPY about_page (id, title, slug, content, image, height_field, width_field, create_date, updated, user_id) FROM stdin;
+1	What We Do	test	test		0	0	2016-11-02 20:41:31.997299+00	2016-11-02 20:38:04.740134+00	\N
 \.
 
 
@@ -747,7 +748,9 @@ SELECT pg_catalog.setval('auth_permission_id_seq', 33, true);
 --
 
 COPY auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-1	!4wLRTm44MHBHBt1sGP2MpT6ca04v19AnFhzAcDBX	\N	t	nherriot			Nicholas.Herriot@gmail.com	t	t	2016-11-01 10:40:44.255017+00
+2	pbkdf2_sha256$24000$FhQuCqe1mRJl$b8vpXkCtKXEQsV71NziSzeer2unTC7zOU3Q/6aA7li8=	2016-11-02 20:37:04.060231+00	t	dilshad				t	t	2016-11-02 20:36:43.547354+00
+1	pbkdf2_sha256$24000$rTzzaYfTEw5q$gGWQGCC33gB5KJNBZzF+pklqkzkpoKB4P39IuA6/+mg=	2016-11-02 20:41:17.527986+00	t	nherriot			Nicholas.Herriot@gmail.com	t	t	2016-11-01 10:40:44.255017+00
+3	pbkdf2_sha256$24000$CrxTGyO7yN4k$KE7y1/tNjlwzeNAGWA2rWxm581Uo8hXbS4uaVXOwwaM=	\N	f	aaron				f	t	2016-11-02 20:42:32.383125+00
 \.
 
 
@@ -770,7 +773,7 @@ SELECT pg_catalog.setval('auth_user_groups_id_seq', 1, false);
 -- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: chh_db_user
 --
 
-SELECT pg_catalog.setval('auth_user_id_seq', 1, true);
+SELECT pg_catalog.setval('auth_user_id_seq', 3, true);
 
 
 --
@@ -808,6 +811,9 @@ SELECT pg_catalog.setval('contact_contact_id_seq', 1, false);
 --
 
 COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+1	2016-11-02 20:38:04.744431+00	1	Test	1	Added.	8	2
+2	2016-11-02 20:39:50.073308+00	1	nherriot	2	Changed password.	4	2
+3	2016-11-02 20:42:32.596377+00	3	aaron	1	Added.	4	1
 \.
 
 
@@ -815,7 +821,7 @@ COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, cha
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: chh_db_user
 --
 
-SELECT pg_catalog.setval('django_admin_log_id_seq', 1, false);
+SELECT pg_catalog.setval('django_admin_log_id_seq', 3, true);
 
 
 --
@@ -891,6 +897,8 @@ SELECT pg_catalog.setval('django_migrations_id_seq', 27, true);
 --
 
 COPY django_session (session_key, session_data, expire_date) FROM stdin;
+jpbhuq0mxuxt08hefp47oa5y5ybnuptv	MjVhNGNiZWY5ZTJkYzVlOTZhOWYxZThjNjEwMzU0NTQyODU4OTlkOTp7Il9hdXRoX3VzZXJfaGFzaCI6IjM4MjM1ZjE5YWRkMTQ1MDhmNWE5ZWRlYTVmZDg5MzJkOWRiNjk5M2UiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyIn0=	2016-11-16 20:37:04.066003+00
+s3tlad6q3lvy0xgognl6fmrluczfhha4	MjJmZjVmNjg3MmMxNjE5MmEwZWEzNWQ2YzVlMmNkNGJhYzkwYzMyNDp7Il9hdXRoX3VzZXJfaGFzaCI6ImZlZTAyYzY2MWFjMWNhMmQzMWRjZDg4MWQyZjdlZjkzNmQ3N2RlMWIiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2016-11-16 20:41:17.532377+00
 \.
 
 
