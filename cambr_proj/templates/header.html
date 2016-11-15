@@ -3,18 +3,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block head_title %}{{instance.title}}{% endblock head_title %}</title>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+  <title>{% block head_title %}{{instance.title}}{% endblock head_title %}</title>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
   <link rel="stylesheet" type="text/css" href="https://www.filamentgroup.com/lab/bulletproof_icon_fonts.html">
   <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/theme.css' %}">
+  <link rel="stylesheet" type="text/css" href="{# static 'bootstrap/css/bootstrap-theme.css' #}">
   <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/carousel.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/ie10-viewport-bug-workaround.css' %}">
+  <link rel="stylesheet" type="text/css" href="{# static 'bootstrap/css/ie10-viewport-bug-workaround.css' #}">
   <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/font-awesome/css/font-awesome.min.css' %}">
 
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <script src="{% static 'bootstrap/js/ie-emulation-modes-warning.js' %}"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <script src="{% static 'bootstrap/js/ie-emulation-modes-warning.js' %}"></script>
     
 </head>
 <body>
