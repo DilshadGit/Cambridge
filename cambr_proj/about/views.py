@@ -6,7 +6,7 @@ from django.utils import timezone
 # Create your views here.
 from .models import Page
 from .forms import PageForm
-
+from django.contrib.auth.decorators import login_required, permission_required
 
 # def about_page(request):
 #     context = ''
@@ -42,11 +42,9 @@ def team_page(request):
 
 
 
-
+# We only want a user who can login to be able to create posts
+@login_required
 def create_page(request):
-    # This will stop user to acces to create page without login
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
     form = PageForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         obj_form = form.save(commit=False)
