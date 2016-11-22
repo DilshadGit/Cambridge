@@ -70,10 +70,9 @@ def post_details(request, slug=None):
     }
     return render(request, 'post_detail.html', context)
 
-
+# We only want a user who can login to be able to create posts
+@login_required
 def update_post(request, slug=None):
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
     instance = get_object_or_404(Post, slug=slug)
 
     form = PostForm(request.POST or None,
@@ -98,10 +97,9 @@ def update_post(request, slug=None):
     }
     return render(request, 'post_update.html', context)
 
-
+# We only want a user who can login to be able to create posts
+@login_required
 def delete_post(request, slug=None):
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
     instance = get_object_or_404(Post, slug=slug)
     instance.delete()
     messages.success(request, 'Successfully Deleted ')

@@ -79,10 +79,9 @@ def detail_page(request, slug=None):
      
     return render(request, 'page_detail.html', context)
 
-
+# We only want a user who can login to be able to create posts
+@login_required
 def update_page(request, slug=None):
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
     instance = get_object_or_404(Page, slug=slug)
 
     form = PageForm(request.POST or None,
@@ -104,10 +103,10 @@ def update_page(request, slug=None):
     }
     return render(request, 'page_update.html', context)
 
-
+# We only want a user who can login to be able to create posts
+@login_required
 def delete_page(request, slug=None):
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
+
     instance = get_object_or_404(Page, slug=slug)
     instance.delete()
     messages.success(request, 'Successfully Deleted ')
