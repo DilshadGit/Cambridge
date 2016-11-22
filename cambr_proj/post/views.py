@@ -8,6 +8,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .forms import PostForm
 from .models import Post
 from about.models import Page
+from django.contrib.auth.decorators import login_required, permission_required
 
 
 def list_post(request):
@@ -32,11 +33,11 @@ def list_post(request):
 
     return render(request, 'posts.html', context)
 
-
+# We only want a user who can login to be able to create posts
+@login_required
 def create_post(request):
-    # This will stop user to acces to create page without login
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
+    print "We are in 'create_post'"
+
     form = PostForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         obj_form = form.save(commit=False)
@@ -69,10 +70,9 @@ def post_details(request, slug=None):
     }
     return render(request, 'post_detail.html', context)
 
-
+# We only want a user who can login to be able to create posts
+@login_required
 def update_post(request, slug=None):
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
     instance = get_object_or_404(Post, slug=slug)
 
     form = PostForm(request.POST or None,
@@ -97,10 +97,9 @@ def update_post(request, slug=None):
     }
     return render(request, 'post_update.html', context)
 
-
+# We only want a user who can login to be able to create posts
+@login_required
 def delete_post(request, slug=None):
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
     instance = get_object_or_404(Post, slug=slug)
     instance.delete()
     messages.success(request, 'Successfully Deleted ')

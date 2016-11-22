@@ -6,7 +6,7 @@ from django.utils import timezone
 # Create your views here.
 from .models import Page
 from .forms import PageForm
-
+from django.contrib.auth.decorators import login_required, permission_required
 
 # def about_page(request):
 #     context = ''
@@ -50,11 +50,9 @@ def board_page(request):
     return render(request, 'our_board.html', context)
 
 
-
+# We only want a user who can login to be able to create posts
+@login_required
 def create_page(request):
-    # This will stop user to acces to create page without login
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
     form = PageForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         obj_form = form.save(commit=False)
@@ -89,10 +87,9 @@ def detail_page(request, slug=None):
      
     return render(request, 'page_detail.html', context)
 
-
+# We only want a user who can login to be able to create posts
+@login_required
 def update_page(request, slug=None):
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
     instance = get_object_or_404(Page, slug=slug)
 
     form = PageForm(request.POST or None,
@@ -114,10 +111,10 @@ def update_page(request, slug=None):
     }
     return render(request, 'page_update.html', context)
 
-
+# We only want a user who can login to be able to create posts
+@login_required
 def delete_page(request, slug=None):
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
+
     instance = get_object_or_404(Page, slug=slug)
     instance.delete()
     messages.success(request, 'Successfully Deleted ')
