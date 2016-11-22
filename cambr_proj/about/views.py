@@ -41,6 +41,14 @@ def team_page(request):
     return render(request, 'our_team.html', context)
 
 
+def board_page(request):
+    title_page = Page.objects.all().order_by('-title')
+    context = {
+        'query_page': title_page
+    }
+
+    return render(request, 'our_board.html', context)
+
 
 
 def create_page(request):

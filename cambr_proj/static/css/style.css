@@ -20,15 +20,27 @@ nav.navbar.navbar-inverse  {
 	text-transform: uppercase;
 }
 
+ul.nav.navbar-nav>li>a {
+	font-size: 13px;
+}
+
 ul.nav.navbar-nav>li>a:focus,
 ul.nav.navbar-nav>li>a:hover {
 	color: #000;
 }
 
+ul.dropdown-menu>li>a {
+	color: #000;
+} 
+
 li.dropdown.open>a.dropdown-toggle,
 li.dropdown.open>a.dropdown-toggle:focus, 
 li.dropdown.open>a.dropdown-toggle:hover {
 	background: #991f00;
+}
+
+li.dropdown.open>a.dropdown-toggle {
+	color: #000;
 }
 
 ul.dropdown-menu  {
@@ -59,6 +71,10 @@ ul.dropdown-menu>li.active>a {
 	background: #fff;
 	color: #000;
 	text-transform: uppercase;
+}
+
+ul.dropdown-menu li {
+	color: #000;
 }
 
 .dropdown-menu>li.active>a:focus,
@@ -203,18 +219,23 @@ div.panel.panel-primary > div.panel-body {
 }
 
 
-div.col-lg-3.col-sm-4.col-6 > button.btn.btn-primary {
+div.col-lg-3.col-md-4.col-sm-6 > button.btn.btn-primary {
 	margin-bottom: 10px;
 }
 
-div.col-lg-3.col-sm-6.col-6 p {
+div.col-lg-3.col-md-4.col-sm-6>p {
 	/*border: 1px solid #000;*/
+	display: inline-block;
+	text-overflow: ellipsis;
+  	word-wrap: break-word;
+  	height: 150px;
+  	overflow: hidden;
 }
 
-div.col-lg-3.col-sm-4.col-6 > p {
+div.col-lg-3.col-md-4.col-sm-6 > p {
 	color: #000;
 	text-align: justify;
-	line-height: 30px;
+	line-height: 25px;
 	font-family: "Times New Roman", Times, serif;
 	font-size: 16px;
 }

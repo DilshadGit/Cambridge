@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+<script type="text/javascript">
+	$('.thumbnail').click(function(){
+	  	$('.modal-body').empty();
+	  	var title = $(this).parent('a').attr("title");
+	  	$('.modal-title').html(title);
+	  	$($(this).parents('div').html()).appendTo('.modal-body');
+	  	$('#myModal').modal({show:true});
+	});
+</script>
+
+<div class="container">
+	<div class="row">
+		<h3>Jo Studdert, Chair of the Board</h3>
+		<div class="row">
+			<div class="col-lg-3 col-md-4 col-sm-6">
+				<a href="#" title="Jo Studdert">
+					<img src="{% static 'images/Jo.JPG' %}" alt="Jo Studdert" class="thumbnail img-responsive">
+				</a>
+				<p class="text-muted">
+					Jo is a retired primary school teacher, having begun her career in an ex-mining town in Northumberland, followed by many years in Inner London, mainly in Hackney and Tower Hamlets. After moving with her family to Cambridge, she soon joined the staff of Queen Edith Primary School as Deputy Head and SENCo.
+
+					She started a Home-Start prep course 3 weeks after her retirement and loved her time as a family visiting volunteer. Her volunteering then took a different turn as she became a trustee of Home-Start Cambridge and District before the merger which formed Home-Start Cambridgeshire.
+				</p>		
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6">
+				<a href="#" title="Parvin Wynn, Vice-chair">
+					<img src="{% static 'images/Parvin Wynn.jpg' %}" alt="Parvin Wynn" class="thumbnail img-responsive">
+				</a>
+				<p class="text-muted">
+					Since 1985 Parvin has been volunteering, both here and in Australia. She was a founding member for JCI Milton Keynes. In Australia she was vice chair for Doncare Community Services, member of the Oxfam Skill Share Committee and the Australian Institute of Management Leadership Development Committee. Parvin joined Home-Start in 2012 and brings business and organisation planning skills to the team. Her work experience includes Project Management in the Computing Services industry followed by senior management roles in Financial Services.
+
+					In 2008, Parvin was awarded the ‘Menzies Community Australia Day Award’ for her contribution to the community.
+				</p>	
+			</div>
+			
+			<div class="col-lg-3 col-md-4 col-sm-6">
+				<a href="#" title="Sue Wilson, Treasurer">
+					<img src="{% static 'images/Sue.jpg' %}" alt="Sue Wilson" class="thumbnail img-responsive">
+				</a>
+				<p class="text-muted">
+					Sue is a director at PricewaterhouseCoopers (PwC) specialising at work primarily in employment and tax issues for fast-growth businesses. She is a chartered accountant and chartered tax adviser. Outside of work, Sue also acts as treasurer for her local church and independent examiner for another small charity. Sue joined the Board of HSC in 2015 as treasurer and brings primarily financial management and regulatory skills to the team.
+				</p>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6">
+				<a href="#" title="Nigel Blower, Company Secretary">
+					<img src="{% static 'images/Nigel.jpg' %}" alt="Nigel Blower" class="thumbnail img-responsive">
+				</a>
+				<p class="text-muted">
+					Nigel became a trustee of Home-Start Cambridge in 2013, serving as Treasurer and Company Secretary. After the scheme merger, he continued as Company Secretary of Home-Start Cambridgeshire and is currently also Deputy Treasurer.
+
+					Nigel has been a Cambridge primary school teacher for over 10 years, taking responsibility for mathematics, and prior to that was a partner in a small software consultancy business.
+				</p>		
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6">
+				<a href="#" title="Aaron Venables, Trustee">
+					<img src="{% static 'images/aaron.jpg' %}" alt="Aaron Venables" class="thumbnail img-responsive">
+				</a>
+				<p class="text-muted">
+					Aaron has over 18 years of commercial leadership experience managing various sales and marketing teams in the Life Science and Pharmaceutical industries. His current position is as Chief Operating Officer for the Weatherbys DNA Laboratory. Aaron has been on the Board of Trustees since August 2015 and is also our Data Protection Officer. Prior to that he served on the board at Home-Start Glasgow North and worked on the Scotland Appeals Committee for BBC Children in Need.
+				</p>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6">
+				<a href="#" title="Sini Rinne, Trustee">
+					<img src="{% static 'images/Sini.JPG.svg' %}" alt="Sini Rinne" class="thumbnail img-responsive">
+				</a>
+				<p class="text-muted">
+					Sini is a senior consultant at Cambridge Policy Consultants (CPC) with more than 15 years of research and evaluation experience in economic and social policy development. She leads CPC’s third sector portfolio and has worked with major UK and global charities, grass-root organisations and their funders. She has developed specific interest and expertise in developing social justice and anti-poverty work, as well as assessing advocacy and influencing. Sini joined the Board of Trustees in 2013 and has been mainly involved in the charity’s evaluation and fundraising work. She also serves as a referral order panellist for the Cambridgeshire Youth Offending Service.
+				</p>
+			</div>
+			
+		</div>
+		<hr>
+		<a href="/">Home</a>
+		<hr>
+	</div>
+</div>
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+					<h3 class="modal-title">Heading</h3>
+			</div>
+			<div class="modal-body">
+				Linda has over 20 years’ experience in the voluntary sector having commenced working as an administrator for a children's charity in 1993 and then with Home-Start Cambridgeshire in 2004. She enjoys the diversity of the role which includes contact with families, volunteers, trustees and staff through to helping to organise events and fundraising. Prior to this Linda worked in a bank for 14 years. She has two grown up sons and is treasurer for a local sports club..
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock %}
+

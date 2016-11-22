@@ -50,6 +50,9 @@
         </li>
         <li class="{% if request.resolver_match.url_name == 'our_team' %}active{% endif %}">
             <a href="{% url 'about:our_team' %}">Our Team</a>
+        </li>
+         <li class="{% if request.resolver_match.url_name == 'our_board' %}active{% endif %}">
+            <a href="{% url 'about:our_board' %}">Our Board</a>
           </li>
         <li class="{% if request.resolver_match.url_name == 'contact_us' %}active{% endif %}">
           <a href="{% url 'contact:contact_us' %}">Contact</a>
