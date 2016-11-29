@@ -334,3 +334,12 @@ h3 {
 /* Used to pad Noisy Atom logo up on the footers */
 
 div.col-md-3 > a > img {margin-top: -5px}
+
+/*footer*/
+a i.fa.fa-arrow-circle-up.fa-3x,
+a i.fa.fa-linkedin-square.fa-3x,
+a i.fa.fa-facebook-square.fa-3x {
+	color: #fff;
+}
+
+
