@@ -80,7 +80,7 @@
           <li class="{% if request.resolver_match.url_name == 'auth_login' %}active{% endif %}">
           <a href="{% url 'auth_login' %}">{% trans 'Login' %}</a></li>
           <li>
-          <a href="{% url 'registration_register' %}">{% trans 'Register' %}</a></li>
+          <!-- <a href="{% url 'registration_register' %}">{% trans 'Register' %}</a></li> -->
         {% endif %}
         <li class="{% if request.resolver_match.url_name == 'http://uk.virginmoneygiving.com/charity-web/charity/finalCharityHomepage.action?charityId=1001602' %}active{% endif %}">
 

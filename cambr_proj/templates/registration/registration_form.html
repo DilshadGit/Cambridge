@@ -11,10 +11,10 @@
 		<div class="col-md-8">
 
 			<h3>Registeration form</h3>
-			<form method="post" action="">
+			<form method="post" action="{% url 'registration_register' %}">
 			    {% csrf_token %}
 			    {{ form|crispy }}
-			    <input type="submit" class="btn readmore" value="{% trans 'Submit' %}" />
+			    <input type="submit" class="btn btn-primary" value="{% trans 'Submit' %}" />
 			</form>
 		</div>
 	</dir>
