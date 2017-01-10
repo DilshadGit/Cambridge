@@ -16,7 +16,7 @@ import os, socket
 # the list to make this settings file a 'dev' build only.
 
 
-DEVELOPER_MACHINES = ['Zenbook-UX32A', 'dilmac-vb', 'dilmac', 'my-mac-machine', 'my-linux-machine']
+DEVELOPER_MACHINES = ['Zenbook-UX32A', 'dilmac-VB', 'dilmac', 'my-mac-machine', 'my-linux-machine']
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
