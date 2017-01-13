@@ -15,10 +15,8 @@ def upload_image_location(instance, filename):
     print filename, ' LOCATION'
 
 
-class Page(models.Model):
-    # This line below will tell the browser who create the page
-    user            = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
-    title           = models.CharField(max_length=120)
+class Home(models.Model):
+    title           = models.CharField(max_length=100)
     slug            = models.SlugField(unique=True)
     content         = models.TextField()
     image           = models.ImageField(upload_to=upload_image_location, null=True,
@@ -31,35 +29,27 @@ class Page(models.Model):
     def __unicode__(self):
         return self.title
 
-
-    def __unicode__(self):
-        return self.title
-
     def get_absolute_url(self):
         # return 'about/%s/'%(self.id)
         # return reverse('about:page_detail', kwargs={'id': self.id})
-        return reverse('about:page_detail', kwargs={'slug': self.slug})
+        return reverse('main:detail', kwargs={'slug': self.slug})
 
 
-    class Meta:
-        ordering = ['-create_date', '-updated']
-
-
-def create_slug(instance, new_slug=None):
+def create_index_slug(instance, new_slug=None):
     slug = slugify(instance.title)
     # change the title from 'what we do -> 'what-we-do'
     if new_slug is not None:
         slug = new_slug
-    query_set = Page.objects.filter(slug=slug).order_by('-id')
+    query_set = Home.objects.filter(slug=slug).order_by('-id')
     exists = query_set.exists()
     if exists:
         new_slug = '%s-%s' % (slug, query_set.first().id)
-        return create_slug(instance, new_slug=new_slug)
+        return create_index_slug(instance, new_slug=new_slug)
     return slug
 
 
-def pre_save_post_receiver(sender, instance, *args, **kwargs):
+def pre_save_index_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
-        instance.slug = create_slug(instance)
+        instance.slug = create_index_slug(instance)
 
-pre_save.connect(pre_save_post_receiver, sender=Page)
+pre_save.connect(pre_save_index_receiver, sender=Home)

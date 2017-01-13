@@ -8,18 +8,6 @@ from .models import Page
 from .forms import PageForm
 from django.contrib.auth.decorators import login_required, permission_required
 
-# def about_page(request):
-#     context = ''
-#     return render(request, 'about_us.html', context)
-
-
-def index_page(request):
-    title_page = Page.objects.all().order_by('-title')
-    context = {
-        'query_page': title_page
-    }
-
-    return render(request, '../templates/index.html', context)
 
 def list_page(request):
     query_page = Page.objects.filter(

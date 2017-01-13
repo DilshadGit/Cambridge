@@ -16,7 +16,7 @@ import os, socket
 # the list to make this settings file a 'dev' build only.
 
 
-DEVELOPER_MACHINES = ['Zenbook-UX32A', 'kieran', 'dilmac-vb', 'dilmac', 'my-mac-machine', 'my-linux-machine']
+DEVELOPER_MACHINES = ['Zenbook-UX32A', 'kieran', 'dilmac-VB', 'dilmac', 'my-mac-machine', 'my-linux-machine']
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -68,6 +68,7 @@ if socket.gethostname() in DEVELOPER_MACHINES:
         'about',
         'contact',
         'crispy_forms',
+        'main',
         'post',
         'registration',
     ]
@@ -124,6 +125,7 @@ else:
         'about',
         'contact',
         'crispy_forms',
+        'main',
         'post',
         'registration',
     ]

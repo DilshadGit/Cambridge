@@ -17,7 +17,7 @@ nav.navbar.navbar-inverse  {
 
 .navbar-inverse .navbar-nav > li > a {
 	color: #000;
-	text-transform: uppercase;
+	text-transform: uppercase;content
 }
 
 ul.nav.navbar-nav>li>a {
@@ -216,6 +216,22 @@ div.col-md-8 > p {
 	line-height: 26px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 16px;
+}
+
+div.col-md-12 > p.content {
+	-webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
+}
+
+/*Imge bio content*/
+
+p.text-muted {
+	text-align: justify;
+	-webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+    text-decoration-line: 2px;
 }
 
 

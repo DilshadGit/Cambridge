@@ -13,14 +13,13 @@ from .views import (
 )
 from about import views
 
-urlpatterns = [
-    url(r'^$', views.index_page, name='index'),
+urlpatterns = [    
     url(r'^pages/', views.list_page, name='pages'),
     url(r'^teams/', views.team_page, name='our_team'),
     url(r'^board/', views.board_page, name='our_board'),
     url(r'^create/', views.create_page, name='create_page'),
-    url(r'^about/detail/(?P<slug>[\w-]+)/$', views.detail_page, name='page_detail'),
-    url(r'^about/update/(?P<slug>[\w-]+)/$', views.update_page, name='page_update'),
-    url(r'^about/delete/(?P<slug>[\w-]+)/$', views.delete_page, name='page_delete'),
+    url(r'^detail/(?P<slug>[\w-]+)/$', views.detail_page, name='page_detail'),
+    url(r'^update/(?P<slug>[\w-]+)/$', views.update_page, name='page_update'),
+    url(r'^delete/(?P<slug>[\w-]+)/$', views.delete_page, name='page_delete'),
 ]
 

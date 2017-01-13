@@ -19,13 +19,13 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf.urls.static import static
 
-# from post.views import *
 
 urlpatterns = [
-    url(r'', include('about.urls', namespace='about')),
+    url(r'^admin/', admin.site.urls),
+    url(r'', include('main.urls', namespace='main')),
+    url(r'^about/', include('about.urls', namespace='about')),
     url(r'^contact/', include('contact.urls', namespace='contact')),
     url(r'^posts/', include('post.urls', namespace='post')),
-    url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.default.urls')),
 ]
 if settings.DEBUG:
