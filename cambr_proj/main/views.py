@@ -16,7 +16,7 @@ def index_page_view(request):
     context = {
         'query_page': data_obj,
     }
-    return render(request, 'index.html', context)
+    return render(request, 'home.html', context)
 
 @login_required
 def create_index_view(request):
