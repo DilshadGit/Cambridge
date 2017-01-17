@@ -36,13 +36,13 @@
           </a>
         
           <ul class="dropdown-menu">
-            {% for obj in query_page %}
-              <li class="{% if request.resolver_match.url_name == 'page_detail' %}active{% endif %}">
-                <a href="{% url 'about:page_detail' slug=obj.slug  %}">
-                  {{obj.title}}
-                </a>
-              </li>
-            {% endfor %}
+
+          <li class="{% if request.resolver_match.url_name == 'page_detail' %}active{% endif %}">
+            <a href="{% url 'about:page_detail' slug=query_page.slug  %}">
+              {{query_page.title}}
+            </a>
+          </li>
+
           </ul>
         </li>
         <li class="{% if request.resolver_match.url_name == 'list_post' %}active{% endif %}">
