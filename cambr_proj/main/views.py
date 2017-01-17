@@ -25,25 +25,17 @@ def index_page_view(request):
         context - containing the Home object which will populate the template.
     """
 
-    no_home_page_text = False
-    try:
-        home_main = Home.objects.get(pk=1)
-        print "The title is: ", home_main.title
-        print "The slug is: ", home_main.slug
-        print "The main content is: ", home_main.content
+    home_main, created = Home.objects.get_or_create(pk=1)
 
-    except Home.DoesNotExist:
-        print "The home page does not exist. Make sure we can render the add button"
-        no_home_page_text = True
-        home_main = "Default Page"
-        home_main.slug = "Default slug"
-        home_main.name = "Default name"
-        home_main.content = "Default content"
+    if created:
+        print "We had to create this object"
+        home_main.title="Welcome to Home-Start Cambridgeshire"
+        home_main.content="Default content please update"
+        home_main.save()
 
     print " This is the index_page view..."
 
-    context = {'query_page': home_main,
-               'no_text': no_home_page_text}
+    context = {'query_page': home_main}
 
     return render(request, 'home.html', context)
 

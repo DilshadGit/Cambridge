@@ -33,12 +33,6 @@
 			<hr>
 			<br/>
 
-			<div class="container">
-			{% if user.is_staff or user.is_authenticated %}
-				{%  if no_text %}
-					<a href="{% url 'main:create' %}"><button class="btn btn-success create">Add New Page</button></a>
-				{%  endif %}
-			{% endif %}
 			</div>
 		</div>
 	</div>
