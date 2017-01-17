@@ -24,14 +24,12 @@
 			{% if image %}
 				<img src="{{STATIC_URL}}{{image.url}}" class="thumbnail img-responsive pull-right">
 			{% endif %}
-			<p> The slug is: {{ query_page.slug }} }}</p>
+			<p> {{ query_page.content }} </p>
 			{% if user.is_staff or user.is_authenticated %}
 				<a href="{% url 'main:update' slug=query_page.slug %}"><button class="btn btn-primary">Update</button></a>
 			{% endif %}
 			<p class="content">{{data.content|linebreaks}}</p>
 
-
-			
 			<hr>
 			<br/>
 

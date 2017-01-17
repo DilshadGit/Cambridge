@@ -87,7 +87,9 @@ def detail_index_view(request, slug=None):
 @login_required
 def update_index_view(request, slug=None):
     print "We are in update index..."
+    print "The slug is: ", slug
     instance = get_object_or_404(Home, slug=slug)
+    print "The instance slug is: ", instance.slug
 
     form = HomeForm(request.POST or None,
                     request.FILES or None, instance=instance)
