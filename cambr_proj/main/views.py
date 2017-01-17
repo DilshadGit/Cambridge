@@ -14,7 +14,7 @@ def index_page_view(request):
     Description:
         This handles the creation of an index page. The index page takes data from the Home model and renders. In this
         instance we only ever have 1 item in our table. This first item can be updated but not deleted. If it does not
-        exist the page will contain an 'add' button to allow the user to add the first item to the page to be rendered.
+        exist the view will create a default object to allow the user to add the first item to the page to be rendered.
 
     :param request:
         This takes a request object. It should contain:
@@ -32,8 +32,6 @@ def index_page_view(request):
         home_main.title="Welcome to Home-Start Cambridgeshire"
         home_main.content="Default content please update"
         home_main.save()
-
-    print " This is the index_page view..."
 
     context = {'query_page': home_main}
 
