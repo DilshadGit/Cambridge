@@ -35,6 +35,7 @@ def index_page_view(request):
     except Home.DoesNotExist:
         print "The home page does not exist. Make sure we can render the add button"
         no_home_page_text = True
+        home_main = "Default Page"
 
     print " This is the index_page view..."
 
