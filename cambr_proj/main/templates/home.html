@@ -11,7 +11,7 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-7">
 			{% if messages %}
 			<ul class="messages">
 			    {% for message in messages %}
@@ -21,26 +21,28 @@
 			{% endif %}
 
 			<h3>{{query_page.title}} <small class="pull-right"><i>{{create_date.timesince}}</i></small></h3>
-			{% if image %}
-				<img src="{{STATIC_URL}}{{image.url}}" class="thumbnail img-responsive pull-right">
-			{% endif %}
-			<p> {{ query_page.content }} </p>
+			
+			<p class="main-content"> {{ query_page.content|linebreaks }} </p>
 			{% if user.is_staff or user.is_authenticated %}
 				<a href="{% url 'main:update' slug=query_page.slug %}"><button class="btn btn-primary">Update</button></a>
 			{% endif %}
-			<p class="content">{{data.content|linebreaks}}</p>
-
-			<hr>
-			<br/>
-
-			<div class="container">
-			{% if user.is_staff or user.is_authenticated %}
-				{%  if no_text %}
-					<a href="{% url 'main:create' %}"><button class="btn btn-success create">Add New Page</button></a>
-				{%  endif %}
-			{% endif %}
-			</div>
 		</div>
+		<div class="col-md-5" style="height:400px; width:400px;overflow:hidden;">
+			{% if query_page.image %}
+				<img src="{{STATIC_URL}}{{query_page.image.url}}" class="img-responsive pull-right">
+			{% endif %}
+		</div>
+		<br/>
+
+		<div class="container">
+		
+		{% if user.is_staff or user.is_authenticated %}
+			{%  if no_text %}
+				<a href="{% url 'main:create' %}"><button class="btn btn-success create">Add New Page</button></a>
+			{%  endif %}
+		{% endif %}
+		</div>
+		
 	</div>
 </div>
 {% endblock content %}
