@@ -36,6 +36,9 @@ def index_page_view(request):
         print "The home page does not exist. Make sure we can render the add button"
         no_home_page_text = True
         home_main = "Default Page"
+        home_main.slug = "Default slug"
+        home_main.name = "Default name"
+        home_main.content = "Default content"
 
     print " This is the index_page view..."
 
