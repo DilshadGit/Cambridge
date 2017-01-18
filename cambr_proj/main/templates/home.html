@@ -8,7 +8,6 @@
 	{% include 'carousel.html' %}
 {% endblock %}
 
-
 <div class="container">
 	<div class="row">
 		<div class="col-md-7">
@@ -27,6 +26,7 @@
 				<a href="{% url 'main:update' slug=query_page.slug %}"><button class="btn btn-primary">Update</button></a>
 			{% endif %}
 		</div>
+		
 		<div class="col-md-5" style="height:400px; width:400px;overflow:hidden;">
 			{% if query_page.image %}
 				<img src="{{STATIC_URL}}{{query_page.image.url}}" class="img-responsive pull-right">
