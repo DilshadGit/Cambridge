@@ -131,7 +131,7 @@ else:
     ]
 
 
-DEFAULT_FROM_EMAIL = "Coding For Entrepreneurs <info@home_start_cambridge.com>"
+DEFAULT_FROM_EMAIL = "Home Start Cambridge <info@home_start_cambridge.com>"
 
 EMAIL_HOST = 'smtp.homestartcambridgeshire.co.uk'
 EMAIL_HOST_USER = 'office@homestartcambridgeshire.co.uk'
@@ -211,14 +211,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-#  Lecture 25
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     #'/var/www/static/',
 ]
 
 
-#  Lecture 25
+
 # static_cdn stand for static content delivery network
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static-cdn')
 
