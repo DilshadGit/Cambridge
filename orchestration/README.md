@@ -3,7 +3,7 @@ Read Me for running of Vagrant to create VM's for AlfaAesar
 
 
 Author Nicholas Herriot
-Created 14th Sep 2016
+Created 25th Jan 2017
 
 You should have ansible and vagrant and VirtualBox installed. If not you can install
 with:
@@ -20,44 +20,33 @@ Note:   All VM's are not secure at the time of writing this. They use the defaul
 		user. They should only be used for testing on your own local machine.
 
 
-## Prerequisite Before Launching Vagrant
+## Directory Structure
 
-Go to the golbals/alfacms directory within this directory and follow the README.md file
+This gives a brief description of what each directory has and used for.
+The root folder has ansible 'playbooks' which are used to carry out actions on the server.
 
-## Start Vagrant Machine
+### Globals
 
-To start vagrant which will run the vagrantfile within this direcotry do:
-
-/>  vagrant  up
-
-## Reload an Ansible Script
-
-This will try and install all the software required to run your VM's and show you
-results of each task as it goes:
-
-/>  vagrant provision
+The globals directory contains config parameters and machine names used by the ansible scripts.
+It also contains files that should be copied to your host (development) machine to allow it to
+correctly identify machines it needs to communicate with while deploying builds to machines.
 
 
-## Stop Your VM
+### vars
 
-This will stop your machine - keeping all the saved state of that machine.
+The vars directory has configuration files that are used to deploy to a machine. e.g if you are
+creating a server from scratch then you will need to know what config to give apache, what ports
+you wish to open, what database parameters and so on.
 
-/> vagrant halt
+
+### backups
+
+This contains a backup of a live database that is pulled from a machine. Ansible can also remove
+a database from a machine to make orchestration 'safe'.
 
 
-## Quickly Access Your VM
 
-You can quickly access your VM from the command prompt that you used to bring up
-your machines. So in the console that you used  to type 'vagrant up' do:
 
-/> vagrant ssh
-
-This will ssh you onto that machine as the 'vagrant' user.
-This will allow you to run all machines defined in your vagrant file.
-Or if you want to run a specific machine state the host name given in
-the Vagrantfile in the command like this:
-
-/> vagrant ssh alfaES1-7
 
 
 
