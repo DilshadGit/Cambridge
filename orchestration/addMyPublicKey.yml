@@ -1,6 +1,7 @@
 # This script will provision your public SSH key onto the remote machine for the admin and cms users.
 ---
-- hosts: chh-dev
+#- hosts: chh-dev
+- hosts: ubuntu14-test
   user: '{{adminuser}}'
 
   vars_files:

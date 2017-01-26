@@ -1,6 +1,7 @@
-# This file will pull down from the latest software in 'master', collect static files, do django migration. No restart of
-# services will be restarted. It requires a user who has CMS privillages and it would be helpfull if there is already a public key
-# setup for the ssh connection between your host computer and the destination
+# This file will pull down from the latest software in 'product'(i.e. what is in the git_branch variable, collect
+# static files, do django migration. No restart of services will be restarted. It requires a user who has CMS
+# privillages and it would be helpfull if there is already a public key setup for the ssh connection between your
+# host computer and the destination
 
 ---
 - hosts: chh-dev

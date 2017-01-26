@@ -64,6 +64,13 @@
 104.236.14.123
 
 
+# ************************************************************************
+# ***********  Setup Ubuntu 14.5 Test Server Digital Oceans **************
+
+# Ubuntu 14 Test Server On Digital Oceans
+# This machine is setup from Nicholas Herriot's account and running Ubuntu 14.5 LTR
+[ubuntu14-test]
+46.101.8.117
 
 
 # ************************************************************************
@@ -110,6 +117,8 @@ ansible_ssh_user=root
 [chh-dev:vars]
 ansible_ssh_user=root
 
+[ubuntu14-test:vars]
+ansible_ssh_user=root
 
 # Variables that will be applied to all free flow wines VM servers
 [ffw-all-vm:vars]
