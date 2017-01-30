@@ -44,7 +44,7 @@ will be:
 5) Ansible stops root access via SSH and restarts SSH.
 
 Further connections should be secure. We also need some helper packages to help provision our machines.
-For this use sshpass which allows us to securly send passwords over a network interface and install into
+For this use sshpass which allows us to securely send passwords over a network interface and install into
 a machine
 
 /> sudo apt-get install sshpass

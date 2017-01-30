@@ -3,6 +3,8 @@
 ubuntu_common_deploy_public_keys: ~/.ssh/id_rsa.pub                               # This tells our playbook files where to get your ssh public key from
 ubuntu_common_ssh_port: 22                                                        # If we configure this port our setup.yml file will configure ssh on a different port
 
+rootuser: 'root'
+rootpassword_ubuntu14-test: 'V5QbZ66CS4XJcdXrxpb4KvATuMw8WnqB'
 adminuser: 'chh_admin'
 adminpassword: 'gyACXJaQZC2L'
 cmsuser: 'chh_cms'
