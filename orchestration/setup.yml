@@ -1,5 +1,6 @@
 ---
-- hosts: chh-dev
+#- hosts: chh-dev
+- hosts: ubuntu14-test
   user: root
 
   vars_files:

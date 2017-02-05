@@ -3,6 +3,7 @@
 
 - hosts: ubuntu14-test
   user: '{{rootuser}}'
+  become: true                                               # This will tell ansible to become 'sudo' to issue commands on the machine
 
   vars_files:
     - vars/vagrant_variables.yml

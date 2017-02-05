@@ -1,0 +1,37 @@
+# This is a test script is to remove cms and admin users for a system as the root user.
+# This script is just to clean up a failed deployment and can only be run before a root account is blocked from
+# SSH access
+---
+
+- hosts: ubuntu14-test
+  user: '{{rootuser}}'
+  become: true                                               # This will tell ansible to become 'sudo' to issue commands on the machine
+
+
+  vars_files:
+    - vars/vagrant_variables.yml
+
+  vars:
+    ansible_ssh_user: '{{rootuser}}'                         # become a root user
+  tasks:
+
+  - name: Remove user adminuser
+    user:
+      name: '{{ adminuser }}'
+      state: absent
+      remove: yes
+
+  - name: Remove user cmsuser
+    user:
+      name: '{{ cmsuser }}'
+      state: absent
+      remove: yes
+
+#
+#  - name: Remove User adminuser and cmsuser
+#    command: userdel -m {{ item }}
+#    become: true
+#    become_method: sudo
+#    with_items:
+#      - '{{adminuser}}'
+#      - '{{cmsuser}}'
