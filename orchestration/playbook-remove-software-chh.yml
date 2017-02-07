@@ -1,3 +1,12 @@
+# This removes all software packages, config files and databases from the serve that were installed by the install
+# scripts. Variables are located in the file 'vagrant_variales.yml' file. Before running the script you must:
+# 1) Have run setup.yml.
+# 2) Have run playbook-install.yml
+# 3) It has to be run on a server that already has the 'adminuser' and 'cmsuser' setup via the setup.yml file.
+#
+# To run:
+# />  ansible-playbook playbook-remove-software-chh.yml
+#
 ---
 - hosts: chh-dev
   user: '{{adminuser}}'

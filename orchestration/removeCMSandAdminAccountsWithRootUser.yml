@@ -1,3 +1,16 @@
+# This removes the users 'adminuser' and 'cmsuser' from the machine defined by the 'hosts' variable.
+# Variables are located in the file 'vagrant_variales.yml' file. Before running the script you must:
+# 1) Have 'root' access to the server.
+# 2) Be run before root acces is removed from SSH to the server.
+#
+# To run:
+# />  ansible-playbook removeCMSandAdminAccountsWithRootUser.yml --ask-pass
+#
+# Use the root password of the server when prompted.
+
+
+
+
 # This is a test script is to remove cms and admin users for a system as the root user.
 # This script is just to clean up a failed deployment and can only be run before a root account is blocked from
 # SSH access
@@ -27,11 +40,3 @@
       state: absent
       remove: yes
 
-#
-#  - name: Remove User adminuser and cmsuser
-#    command: userdel -m {{ item }}
-#    become: true
-#    become_method: sudo
-#    with_items:
-#      - '{{adminuser}}'
-#      - '{{cmsuser}}'

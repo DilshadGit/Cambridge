@@ -1,7 +1,11 @@
-# This file will pull down from the latest software in 'product'(i.e. what is in the git_branch variable, collect
-# static files, do django migration. No restart of services will be restarted. It requires a user who has CMS
-# privillages and it would be helpfull if there is already a public key setup for the ssh connection between your
-# host computer and the destination
+# This file will pull down from the latest software in 'master' to the server, collect static files and do django
+# migration on the server.
+# No restart of services will be restarted. You need to:
+# 1) Run the setup.yml script
+# 2) Run the playbook-install.yml script
+# 3) Your SSH key must be on the server for 'cmsuser' and 'adminuser', this should be done in setup.yml
+# To run:
+# />  ansible-playbook playbook-soft-build.yml
 
 ---
 - hosts: chh-dev

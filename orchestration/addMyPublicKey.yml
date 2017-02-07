@@ -1,27 +1,37 @@
-# This script will provision your public SSH key onto the remote machine for the admin and cms users.
+# This adds a public key to the defined 'hosts' variable for users defined as 'adminuser' and 'cmsuser'.
+# Variables are located in the file 'vagrant_variales.yml' file. Before running the script you must:
+# 1) Have 'root' access to the server.
+# 2) Be run before root acces is removed from SSH to the server.
+# 3) It has to be run on a server that already has the 'adminuser' and 'cmsuser' setup.
+# 4) Your public key should be copied to the ./vars/ directory.
+# 5) Your public key file should be called id_rsa.pub
+#
+# To run:
+# />  ansible-playbook addMyPublicKy.yml --ask-pass
+#
+# Use the root password of the server when prompted.
 ---
-#- hosts: chh-dev
+
 - hosts: ubuntu14-test
-  user: '{{adminuser}}'
+  user: '{{rootuser}}'
 
   vars_files:
     - vars/vagrant_variables.yml
-
-  vars:
-    ansible_ssh_user: '{{adminuser}}'                         # We need to override this to use the admin user as
-                                                              # the root account will be locked by this point
 
   tasks:
 
   # Setup an public key for this remote machine by copying the public key of this machine to the remote machine.
   # We need to have our id_rsa.pub file within the vars directory of this setup.yml file.
-  - name: Add My Public Key To CMS and Admin Users
+  - name: Add Public Keys To Server
     authorized_key: user={{ item }}
-      key="{{ lookup('file', ubuntu_common_deploy_public_keys )}}"
+      key="{{ lookup('file', 'vars/id_rsa.pub') }}"
       path='/home/{{ item }}/.ssh/authorized_keys'
       manage_dir=no
     become: true
     with_items:
       - '{{adminuser}}'
       - '{{cmsuser}}'
+
+
+
 

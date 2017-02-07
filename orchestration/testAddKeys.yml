@@ -12,20 +12,17 @@
                                                               # the root account will be locked by this point
   tasks:
 
-  - name: Add user adminuser
-    user:
-      name: '{{ adminuser }}'
-      state: present
-      remove: yes
-
-  - name: Add user adminuser
-    user:
-      name: '{{ cmsuser }}'
-      state: present
-      remove: yes
-
-
-
+#  - name: Add user adminuser
+#    user:
+#      name: '{{ adminuser }}'
+#      state: present
+#      remove: yes
+#
+#  - name: Add user adminuser
+#    user:
+#      name: '{{ cmsuser }}'
+#      state: present
+#      remove: yes
 
 #  - name: Setup | create user chh_admin and chh_cms
 #    command: useradd -m {{ item }} creates=/home/{{ item }}
@@ -35,42 +32,32 @@
 #      - '{{adminuser}}'
 #      - '{{cmsuser}}'
 
-  # Setup passwords for both user 'chh_admin' and 'chh_cms' on our chh-test server
-  - name: Setup | set passwords for chh_admin and chh_user
-    shell: usermod -p $(echo '{{ item.createpassword }}' | openssl passwd -1 -stdin) {{ item.createuser }}
-    become: true
-    become_method: sudo
-    with_items:
-      - { createpassword: '{{adminpassword}}', createuser: '{{adminuser}}' }
-      - { createpassword: '{{cmspassword}}', createuser: '{{cmsuser}}' }
+#  # Setup passwords for both user 'chh_admin' and 'chh_cms' on our chh-test server
+#  - name: Setup | set passwords for chh_admin and chh_user
+#    shell: usermod -p $(echo '{{ item.createpassword }}' | openssl passwd -1 -stdin) {{ item.createuser }}
+#    become: true
+#    become_method: sudo
+#    with_items:
+#      - { createpassword: '{{adminpassword}}', createuser: '{{adminuser}}' }
+#      - { createpassword: '{{cmspassword}}', createuser: '{{cmsuser}}' }
 
-  # Add our admin user to the 'sudo' group so that he may have sudo privillages
-  - name: add our admin to the 'sudo' group
-    user: name={{ adminuser }} comment="Deploy User" groups="sudo,admin,{{ adminuser }}"
-    become: true
-
-  # Setup an public key for this remote machine by copying the public key of this machine to the remote machine.
-  # We need to have our id_rsa.pub file within your home directory.
-  - name: Add My Public Key To CMS and Admin Users
-    authorized_key: user={{ item }}
-      key="{{ lookup('file', ubuntu_common_deploy_public_keys )}}"
-      path='/home/{{ item }}/.ssh/authorized_keys'
-      manage_dir=no
-    become: true
-    with_items:
-      - '{{adminuser}}'
-      - '{{cmsuser}}'
-
+#  # Add our admin user to the 'sudo' group so that he may have sudo privillages
+#  - name: add our admin to the 'sudo' group
+#    user: name={{ adminuser }} comment="Deploy User" groups="sudo,admin,{{ adminuser }}"
+#    become: true
 
   # Setup an public key for this remote machine by copying the public key of this machine to the remote machine.
   # We need to have our id_rsa.pub file within the vars directory of this setup.yml file.
-  - name: Setup | authorized key upload
-    authorized_key:
-      user={{ item }}
+  - name: Add Public Keys To Server
+    authorized_key: user={{ item }}
       key="{{ lookup('file', 'vars/id_rsa.pub') }}"
       path='/home/{{ item }}/.ssh/authorized_keys'
       manage_dir=no
-    #become: true
+    become: true
     with_items:
       - '{{adminuser}}'
       - '{{cmsuser}}'
+
+
+
+

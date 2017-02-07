@@ -1,5 +1,11 @@
 # This file will dump the Live Postgres Database in a compressed format and copy into the orchestrations backup folder.
 # It will use the postgres super user account to access the database.
+# Before running this script you must:
+# 1) Run the setup.yml script
+# 2) Run the playbook-install.yml script
+# 3) Your SSH key must be on the server for 'cmsuser' and 'adminuser', this should be done in setup.yml
+# To run:
+# />  ansible-playbook playbook-database-push.yml
 
 ---
 - hosts: chh-dev

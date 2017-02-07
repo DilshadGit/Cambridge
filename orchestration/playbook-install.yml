@@ -1,8 +1,11 @@
 # This file will install postgres, virtual env, nginx, gunicorn, pip and django onto a vanilla system. It will then
 # pull down from the latest software in 'master', collect static files, do an initial migration and then bring up all
 # the services required.
-# it requires a user who has root privillages who is not root and it would be helpfull if there is already a public key
-# setup for the ssh connection too between your host computer and the destination
+# It requires a user who has root privillages who is not root and it would be helpfull if there is already a public key
+# setup for the ssh connection too between your host computer and the destination. Befor running this you need to:
+# 1) Run the setup.yml script
+# To run:
+# />  ansible-playbook playbook-install.yml
 
 ---
 - hosts: chh-dev
