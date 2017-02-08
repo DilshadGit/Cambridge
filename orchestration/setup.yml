@@ -1,3 +1,11 @@
+# This file will add users cmsuser and adminuser, their passwords and directory structures. It then adds your public
+# key and adminuser to the list of sudoers. It then setups up the bashrc script for your users and has a task to setup
+# the SSH server to stop root access. This part is not active at the time of writing.
+# It requires that you have root access to the machine to run.
+# 1) Run the setup.yml script
+# To run:
+# />  ansible-playbook setup.yml  --ask-pass
+
 ---
 #- hosts: chh-dev
 - hosts: ubuntu14-test

@@ -19,7 +19,7 @@ able to run this within your local machine to spawn your own machines.
 Note:   All VM's are not secure at the time of writing this. They use the default 'vagrant'
 		user. They should only be used for testing on your own local machine.
 
-**For detailed instructions in setting up ansible please read the README.md file in the /ansible
+**For detailed instructions in setting up ansible please read the README.md file in the ./globals/ansible
 directory.**
 
 ## Directory Structure
@@ -64,6 +64,55 @@ you wish to open, what database parameters and so on.
 This contains a backup of a live database that is pulled from a machine. Ansible can also remove
 a database from a machine to make orchestration 'safe'.
 
+
+
+## Scripts To Run
+
+This section describes what scripts should be run and what order. It also give you details of what each
+script does. Each script has a text header telling you what it does and what the order should be. Please
+read this for details. Each command that is run is also displayed on the screen. Please read this to
+get details of what the script is doing as it runs. The script will display text in yellow if it
+performs a task. Green if it does not need to run a task, and Red if it can't run a task.
+
+### Script Order
+
+The is describes the order that scripts have to be run in and what you need access to.
+
+1) setup.yml
+2) playbook-install.yml
+3) playbook-hard-build.yml playbook-soft-build.yml playbook-database-pull.yml playbook-database-push.yml
+4) removeCMSandAdminAccountsWithRootUser.yml testAddKeys.yml addMyPublicKey.yml
+
+
+### Setup
+This sets up users on the machine and adds your public key for the admin and cms users.
+You need to place your public key in ./vars directory of this folder.
+When running you need root password to the machine you connect to. The machine name is declared in the
+hosts variable.
+
+
+### playbook-install
+This installs and sets up the web server, django, DB and configuration files. At this point you don't
+need to add your password to run the script
+
+### playbook-hard-build
+This downloads from git production builds and restarts all services.
+
+### playbook-soft-build
+This downloads form git production builds. It does not restart services.
+
+### playbook-database-pull
+This pulls the postges DB from the server and places onto your local machine.
+
+### playbook-database-push
+This pushes a DB from your backup folder and loads onto the server.
+
+### removeCMSandAdminAccountsWithRootUser
+This removes CMS and Admin users with the root account. You need root access to the machine.
+
+### testAddKeys addMyPublicKey
+This can be run after 1 but it's used for testing and is used to re-add your public key. The testaddkey
+is just used for testing purpose.
 
 
 

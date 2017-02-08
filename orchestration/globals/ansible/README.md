@@ -55,10 +55,13 @@ a machine
 We will connect ansible to our machine in this instance it will be 'ubuntuCambridgeHomeStart' on digital
 oceans with the IP address of: 104.236.14.123. The machine name that ansible will lookup for this IP address
 is 'chh-dev' which is defined in the hosts file.
-Ansible will try and connect as 'root'. However we will not use a 'root' password, we will allow the machines
-to swap pub/private key exchange via ssh. This is the only manual step you will have to do. First manually add
-your SSH public key to the remote machine (You should have already created your pub/private key on your local
-machine).
+Ansible will try and connect as 'root' during setup. So you will need to run the setup script as;
+
+/> ansible-playbook setup.yml --ask-pass
+
+
+However you don't need to use 'root' password. You can manually add your key to any account with the
+(You should have already created your pub/private key on your local machine) the commands
 
 /> ssh-copy-id root@104.236.14.123
 
@@ -75,13 +78,15 @@ directory run the setup file by doing:
 
 />  ansible-playbook setup.yml
 
+If you ran it using --ask-pass and passed the root password you don't need to run the setup again. But ansible is
+idempotent so it should not matter.
+
 
 ## Fully Setup Software And Deploy Django
 
 All you need to do now to complete
 
-
-/> ansible-playbook playbook.yml
+/> ansible-playbook playbook-install.yml
 
 
 ## Frequently Asked Questions
