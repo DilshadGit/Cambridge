@@ -367,6 +367,7 @@ a i.fa.fa-facebook-square.fa-3x {
 /*Image bannder Maintain Aspect Ratio Mixin*/
 /*aspect-ratio*/
 @mixin #first-slide aspect-ratio($width, $height) {
+	@include aspect-ratio(16, 9);
 	  position: relative;
 	  &:before {
 	    display: block;
