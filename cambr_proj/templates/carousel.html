@@ -3,6 +3,28 @@
 {% block carousel %}
 
 
+{% block script %}
+<script src="http://elementqueries.com/EQCSS.js" type="text/javascript" charset="utf-8" async defer></script>
+{% endblock script %}
+
+{% block style %}
+<style type="text/css" media="screen">
+  @element 'img'{
+    $this {
+      height: eval('offsetWidth / (getAttribute("width") / getAttribute("height"))')px;
+    }
+  }
+  div.item.active.container {
+      /*width: 100%;*/
+  }
+  img {
+      display: block;
+      width: auto;
+      height: auto;
+  }
+</style>
+{% endblock style %}
+
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
@@ -12,7 +34,7 @@
       </ol>
       <div class="carousel-inner" role="listbox">
         <div class="item active container">
-          <img id="first-slide" src="{% static 'images/right.png' %}">
+          <img id="first-slide" src="{% static 'images/right.png' %}" width="700" height="346">
           <div class="container">
             <div class="carousel-caption">
               

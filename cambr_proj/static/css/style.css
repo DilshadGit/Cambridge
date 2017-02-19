@@ -363,23 +363,3 @@ a i.fa.fa-facebook-square.fa-3x {
 	color: #fff;
 }
 
-
-/*Image bannder Maintain Aspect Ratio Mixin*/
-/*aspect-ratio*/
-@mixin #first-slide aspect-ratio($width, $height) {
-	@include aspect-ratio(16, 9);
-	  position: relative;
-	  &:before {
-	    display: block;
-	    content: "";
-	    width: 100%;
-    padding-top: ($height / $width) * 100%;
-  }
-  > .content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-}
