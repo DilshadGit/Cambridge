@@ -17,20 +17,20 @@ def upload_image_location(instance, filename):
 
 class Page(models.Model):
     # This line below will tell the browser who create the page
-    user            = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
-    title           = models.CharField(max_length=120)
-    slug            = models.SlugField(unique=True)
-    content         = models.TextField()
-    image           = models.ImageField(upload_to=upload_image_location, null=True,
-                              blank=True, height_field="height_field", width_field="width_field")
-    height_field    = models.IntegerField(default=0)
-    width_field     = models.IntegerField(default=0)
-    create_date     = models.DateTimeField(auto_now=True, auto_now_add=False)
-    updated         = models.DateTimeField(auto_now=False, auto_now_add=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
+    title = models.CharField(max_length=120)
+    slug = models.SlugField(unique=True)
+    content = models.TextField()
+    image = models.ImageField(upload_to=upload_image_location, null=True,
+                              blank=True, height_field="height_field", 
+                              width_field="width_field")
+    height_field = models.IntegerField(default=0)
+    width_field = models.IntegerField(default=0)
+    create_date = models.DateTimeField(auto_now=True, auto_now_add=False)
+    updated = models.DateTimeField(auto_now=False, auto_now_add=True)
 
     def __unicode__(self):
         return self.title
-
 
     def __unicode__(self):
         return self.title
@@ -39,7 +39,6 @@ class Page(models.Model):
         # return 'about/%s/'%(self.id)
         # return reverse('about:page_detail', kwargs={'id': self.id})
         return reverse('about:page_detail', kwargs={'slug': self.slug})
-
 
     class Meta:
         ordering = ['-create_date', '-updated']

@@ -16,15 +16,15 @@ def upload_image_location(instance, filename):
 
 
 class Home(models.Model):
-    title           = models.CharField(max_length=100)
-    slug            = models.SlugField(unique=True)
-    content         = models.TextField()
-    image           = models.ImageField(upload_to=upload_image_location, null=True,
+    title = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True)
+    content = models.TextField()
+    image = models.ImageField(upload_to=upload_image_location, null=True,
                               blank=True, height_field="height_field", width_field="width_field")
-    height_field    = models.IntegerField(default=0)
-    width_field     = models.IntegerField(default=0)
-    create_date     = models.DateTimeField(auto_now=True, auto_now_add=False)
-    updated         = models.DateTimeField(auto_now=False, auto_now_add=True)
+    height_field = models.IntegerField(default=0)
+    width_field = models.IntegerField(default=0)
+    create_date = models.DateTimeField(auto_now=True, auto_now_add=False)
+    updated = models.DateTimeField(auto_now=False, auto_now_add=True)
 
     def __unicode__(self):
         return self.title

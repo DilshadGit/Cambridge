@@ -5,6 +5,7 @@ from .models import Contact
 
 
 class ContactAdmin(admin.ModelAdmin):
+
     class Meta:
         models = Contact
 

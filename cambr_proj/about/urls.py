@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 
 
 from .views import (
-	list_page,
+    list_page,
     create_page,
     team_page,
     detail_page,
@@ -13,7 +13,7 @@ from .views import (
 )
 from about import views
 
-urlpatterns = [    
+urlpatterns = [
     url(r'^pages/', views.list_page, name='pages'),
     url(r'^teams/', views.team_page, name='our_team'),
     url(r'^board/', views.board_page, name='our_board'),
@@ -22,4 +22,3 @@ urlpatterns = [
     url(r'^update/(?P<slug>[\w-]+)/$', views.update_page, name='page_update'),
     url(r'^delete/(?P<slug>[\w-]+)/$', views.delete_page, name='page_delete'),
 ]
-

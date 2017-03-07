@@ -29,8 +29,8 @@ def index_page_view(request):
 
     if created:
         print "We had to create this object"
-        home_main.title="Welcome to Home-Start Cambridgeshire"
-        home_main.content="Default content please update"
+        home_main.title = "Welcome to Home-Start Cambridgeshire"
+        home_main.content = "Default content please update"
         home_main.save()
 
     context = {'query_page': home_main}

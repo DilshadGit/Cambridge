@@ -6,6 +6,7 @@ from .models import Home
 
 
 class HomeAdmin(admin.ModelAdmin):
+
     class Meta:
         models = Home
 

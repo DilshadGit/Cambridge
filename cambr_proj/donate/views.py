@@ -4,10 +4,10 @@ from django.shortcuts import render
 
 
 def dontaes(request):
-	context = ''
-	return render(request, 'donates_now.html', context)
+    context = ''
+    return render(request, 'donates_now.html', context)
 
 
 def support_us(request):
-	context = ''
-	return render(request, 'supports_us.html', context)
+    context = ''
+    return render(request, 'supports_us.html', context)

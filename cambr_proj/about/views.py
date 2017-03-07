@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 
 def list_page(request):
     query_page = Page.objects.filter(
-            create_date=timezone.now()).order_by('-title')
+        create_date=timezone.now()).order_by('-title')
     # title_page = Page.objects.all().order_by('-title')
     context = {
         'query_page': title_page,
@@ -72,10 +72,12 @@ def detail_page(request, slug=None):
         'slug': instance_obj.slug,
         'query_page': title_page
     }
-     
+
     return render(request, 'page_detail.html', context)
 
 # We only want a user who can login to be able to create posts
+
+
 @login_required
 def update_page(request, slug=None):
     instance = get_object_or_404(Page, slug=slug)
@@ -100,6 +102,8 @@ def update_page(request, slug=None):
     return render(request, 'page_update.html', context)
 
 # We only want a user who can login to be able to create posts
+
+
 @login_required
 def delete_page(request, slug=None):
 

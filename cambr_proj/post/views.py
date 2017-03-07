@@ -34,6 +34,8 @@ def list_post(request):
     return render(request, 'posts.html', context)
 
 # We only want a user who can login to be able to create posts
+
+
 @login_required
 def create_post(request):
     print "We are in 'create_post'"
@@ -71,6 +73,8 @@ def post_details(request, slug=None):
     return render(request, 'post_detail.html', context)
 
 # We only want a user who can login to be able to create posts
+
+
 @login_required
 def update_post(request, slug=None):
     instance = get_object_or_404(Post, slug=slug)
@@ -84,7 +88,7 @@ def update_post(request, slug=None):
         # message successfully updated
         messages.success(request, 'Successfully Updated ')
         return HttpResponseRedirect(obj_form.get_absolute_url())
-    # To render the page title on the navbar     
+    # To render the page title on the navbar
     title_page = Page.objects.all().order_by('-title')
 
     context = {
@@ -98,11 +102,11 @@ def update_post(request, slug=None):
     return render(request, 'post_update.html', context)
 
 # We only want a user who can login to be able to create posts
+
+
 @login_required
 def delete_post(request, slug=None):
     instance = get_object_or_404(Post, slug=slug)
     instance.delete()
     messages.success(request, 'Successfully Deleted ')
     return redirect('post:list_post')
-
-
